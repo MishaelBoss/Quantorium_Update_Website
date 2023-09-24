@@ -1,0 +1,67 @@
+@keyframes header_anim{
+	from{
+		transform: translateX(-120%);
+	}
+	to{
+		transform: translateX(0);
+	}
+}
+
+.headh1{
+	transform: translateX(0);
+	animation-name: header_anim;
+	animation-duration: 1s;
+	animation-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+	text-transform: uppercase;
+	color:white;
+	align-self: center;
+}
+
+.header2{
+	display: flex;
+	min-height: 100vh;
+	padding: 8px 50px;
+	background-image: url("/static/images/BG/10-professij.jpg");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size:cover;
+}
+
+.h1{
+	color: black;
+	position: relative;
+	font-family: "Montserrat", sans-serif;
+	font-size: 7em;
+	font-weight: 700;
+}
+
+.h2{
+	position: relative;
+	font-family: "Montserrat", sans-serif;
+	font-size: 5em;
+	font-weight: 700;
+}
+
+.article{
+	position: relative;
+	min-height: 100vh;
+	padding: 8px 50px;
+}
+
+.article_whitebg::before,
+.article_bluebg::before {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	content: '';
+}
+
+.article_whitebg::before{
+	background: rgba(255, 255, 255, 0.5);
+}
+
+.article_bluebg::before{
+	background: rgba(0, 34, 255, 0.5);
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/panel.css')}}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/registr.css')}}">
+      <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+      <link href="../static/signup.css" rel="stylesheet">
+      <link rel="shortcut icon" sizes="32x32" href="{{ url_for('static', filename='icons/Cosmo_ico.png')}}">
+      <title>Войти</title>
+    </head>
+</html>
+<body>
+
+  <div class="header">
+    <a class="logo">Кванториум-Новоуральск<img src="/static/icons/Logo.png" style="height: 20px; width: 20px;"></a>
+    <div class="header-right">
+      <a href="/">Главная</a>
+      <a href="/products">Новости</a>
+      <a href="@">Игра об Кванториуме</a>
+      <a href="@">Направления и программы</a>
+      <a href="@">Мероприятия</a>
+      <a href="@">Курсы</a>
+      <a class="active" href="/login">Войти на сайт</a>
+    </div>
+  </div>
+
+<form>
+    <h3>Login</h3>
+
+    <label for="username">Имя</label>
+    <input type="text" placeholder="Email" id="username">
+
+    <label for="password">Пароль</label>
+    <input type="password" placeholder="Password" id="password">
+
+    <button>Войти</button>
+    <div class="reg">
+      <a href="/register">Зарегистрироваться</a>
+    </div>
+</form>
+
+</body>

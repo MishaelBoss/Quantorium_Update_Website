@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/buy.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/foter.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/panel.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel="shortcut icon" sizes="32x32" href="{{ url_for('static', filename='icons/Cosmo_ico.png')}}">
+    <title>Cosmos-home</title>
+    <title>Покупка</title>
+    <style>
+
+@media (max-width: 800px) {
+  .row {
+    flex-direction: column-reverse;
+  }
+  .col-25 {
+    margin-bottom: 20px;
+  }
+}
+</style>
+</head>
+
+<div class="header">
+  <a class="logo">Космонавтики<img src="/static/icons/rocket.png" style="height: 20px; width: 20px;"></a>
+  <div class="header-right">
+    <a href="/">Главная</a>
+    <a href="/products">Все новости о космосе</a>
+    <a href="/video">Видео из космоса</a>
+    <a href="/tickets">Купить билеты</a>
+    <a href="/login">Войти</a>
+  </div>
+</div>
+
+<body>
+    <div class="row">
+        <div class="col-75">
+          <div class="container">
+              <div class="row">
+                <div class="col-50">
+                  <h3 class="TextBG">Адрес для выставления счета</h3>
+                  <label for="fname" class="TextBG"><i class="fa fa-user"></i> Полное имя</label> 
+                  <input type="text" id="fname" maxlength="20" name="firstname" placeholder="Михаил Яковлев">
+                  <label for="adr" class="TextBG"><i class="fa fa-address-card-o"></i> Адрес</label>
+                  <input type="text" id="adr" name="address" maxlength="30" placeholder="ул. Белинского 41">
+                  <label for="city" class="TextBG"><i class="fa fa-institution"></i> Город</label>
+                  <input type="text" id="city" name="city" maxlength="20" placeholder="Новоуральск">
+                </div>
+      
+                <div class="col-50">
+                  <h3 class="TextBG">Оплата</h3>
+                  <div class="icon-container">
+                    <img height="40" src="/static/images/sber.png">
+                  </div>
+                  <label for="ccnum" class="TextBG">Номер карты</label>
+                  <input type="text" id="ccnum"  maxlength="20" name="cardnumber" placeholder="1111-2222-3333-4444">
+                  <label for="expmonth" class="TextBG">Exp Month</label>
+                  <input type="text" id="expmonth" maxlength="3" name="expmonth" placeholder="September">
+                  <div class="row">
+                    <div class="col-50">
+                      <label for="expyear" class="TextBG">Годен до</label>
+                      <input type="text" id="expyear" name="expyear" maxlength="4" placeholder="2023">
+                    </div>
+                    <div class="col-50">
+                      <label for="cvv" class="TextBG">CVV</label>
+                      <input type="text" id="cvv" name="cvv"maxlength="4" placeholder="352">
+                    </div>
+                  </div>
+                  
+                </div>
+                <div class="search-form">
+              </div>
+            </div>
+              <input type="button" value="Оплатить" class="btn" onclick="alert('А не работает :|')">
+          </div>
+          
+        </div>
+      </div>
+
+    <footer class="footer-distributed" style="margin-top: 120px;">
+
+      <div class="footer-right">
+        <br>
+        <a href="https://www.youtube.com/channel/UCgMNXe8ooAQdunLHOkztAew"><i class="fa fa-youtube"></i></a>
+        <a href="https://t.me/+44uvzl2TzSo5NGEy"><i class="fa fa-telegram"></i></a>
+        <a href="https://vk.com/id597169928"><i class="fa fa-vk"></i></a>
+        <a href="https://github.com/MishaelBoss"><i class="fa fa-github"></i></a>
+      </div>
+
+      <div class="footer-left">
+
+        <p class="footer-links">
+          <a class="link-1" href="/">Главная</a>
+
+          <a href="https://www.youtube.com/channel/UCgMNXe8ooAQdunLHOkztAew">Моц блог</a>
+
+          <a href="/About">Обо мне</a>
+        </p>
+
+        <div class="footer-center">
+
+          <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span>Обл: Свердловская</span> Город: Новоуральск</p>
+          </div>
+  
+          <div>
+            <i class="fa fa-phone"></i>
+            <p>+7.902.446.4388</p>
+          </div>
+  
+          <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:support@company.com">michaelvoov@yandex.ru</a></p>
+          </div>
+  
+        </div>
+
+        <p style="margin-left: 820px;">Mikhaelovsk &copy; 2023</p>
+      </div>
+    </footer>
+</body>
+
+</html>

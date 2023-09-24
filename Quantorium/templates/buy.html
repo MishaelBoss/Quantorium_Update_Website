@@ -14,74 +14,81 @@
     <link rel="shortcut icon" sizes="32x32" href="{{ url_for('static', filename='icons/Cosmo_ico.png')}}">
     <title>Cosmos-home</title>
     <title>Покупка</title>
-    <style>
-
-@media (max-width: 800px) {
-  .row {
-    flex-direction: column-reverse;
-  }
-  .col-25 {
-    margin-bottom: 20px;
-  }
-}
-</style>
 </head>
 
 <div class="header">
-  <a class="logo">Космонавтики<img src="/static/icons/rocket.png" style="height: 20px; width: 20px;"></a>
+  <a class="logo">Кванториум-Новоуральск<img src="/static/icons/Logo.png" style="height: 20px; width: 20px;"></a>
   <div class="header-right">
     <a href="/">Главная</a>
-    <a href="/products">Все новости о космосе</a>
-    <a href="/video">Видео из космоса</a>
-    <a href="/tickets">Купить билеты</a>
-    <a href="/login">Войти</a>
+    <a href="/products">Новости</a>
+    <a href="@">Игра об Кванториуме</a>
+    <a href="@">Направления и программы</a>
+    <a href="@">Мероприятия</a>
+    <a href="@">Курсы</a>
+    <a href="/login">Войти на сайт</a>
   </div>
 </div>
 
-<body>
-    <div class="row">
-        <div class="col-75">
-          <div class="container">
-              <div class="row">
-                <div class="col-50">
-                  <h3 class="TextBG">Адрес для выставления счета</h3>
-                  <label for="fname" class="TextBG"><i class="fa fa-user"></i> Полное имя</label> 
-                  <input type="text" id="fname" maxlength="20" name="firstname" placeholder="Михаил Яковлев">
-                  <label for="adr" class="TextBG"><i class="fa fa-address-card-o"></i> Адрес</label>
-                  <input type="text" id="adr" name="address" maxlength="30" placeholder="ул. Белинского 41">
-                  <label for="city" class="TextBG"><i class="fa fa-institution"></i> Город</label>
-                  <input type="text" id="city" name="city" maxlength="20" placeholder="Новоуральск">
-                </div>
-      
-                <div class="col-50">
-                  <h3 class="TextBG">Оплата</h3>
-                  <div class="icon-container">
-                    <img height="40" src="/static/images/sber.png">
-                  </div>
-                  <label for="ccnum" class="TextBG">Номер карты</label>
-                  <input type="text" id="ccnum"  maxlength="20" name="cardnumber" placeholder="1111-2222-3333-4444">
-                  <label for="expmonth" class="TextBG">Exp Month</label>
-                  <input type="text" id="expmonth" maxlength="3" name="expmonth" placeholder="September">
-                  <div class="row">
-                    <div class="col-50">
-                      <label for="expyear" class="TextBG">Годен до</label>
-                      <input type="text" id="expyear" name="expyear" maxlength="4" placeholder="2023">
-                    </div>
-                    <div class="col-50">
-                      <label for="cvv" class="TextBG">CVV</label>
-                      <input type="text" id="cvv" name="cvv"maxlength="4" placeholder="352">
-                    </div>
-                  </div>
-                  
-                </div>
-                <div class="search-form">
-              </div>
-            </div>
-              <input type="button" value="Оплатить" class="btn" onclick="alert('А не работает :|')">
-          </div>
-          
+<script src="/static/js/buy.js"></script>
+<div id="outer">
+    <div id="inner">
+        <div class="container" id="block-card">
+        <div style="display: inline;">
+        <p class="card_number" style="display: inline-block;" id="image-card">0000000000000000</p>
+        <p class="card_number" style="display: inline-block; font-size: 20px; padding-left: 20px;" id="op-card">NONE</p>
         </div>
-      </div>
+        <div style="position: relative; padding-left: -44px;top: -16px;">
+        <p class="p">{{ card_ns }}</p>
+        <p class="p" id="date-card">00/00</p>
+        <p class="p" id="image-cvv">000</p>
+        </div>
+        </div>
+        <br><br>
+        <div style="display: inline;">
+            <input type="checkbox" value="" id="check" onclick="
+                if (document.getElementById('check').checked){
+                    document.getElementById('block-card').setAttribute('style', 'filter: blur(10px)');
+                }
+                else{
+                    document.getElementById('block-card').setAttribute('style', 'filter: none');
+                }">
+            <label style="color: white;">Скрыть реквизиты</label><br><br>
+            <a style="text-decoration: none;" href="/cart"><h1 style="color: white;">Вся корзина - {{ all_price }} ₽</h1></a>
+            <form method="post">
+        <input required type="text" placeholder="Номер карты" class="input-card-number" maxlength="16" id="card" min="0" onchange="changeCard()" >
+        <input required type="text" placeholder="CVV" class="input-card-number" maxlength="3" min="0" id="cvv" style="width: 17%;" onchange="changeCVV()"><br><br>
+        <select required class="input-card-select" onchange="
+        var mounth = document.getElementById('mounth');
+        var year = document.getElementById('year');
+        document.getElementById('date-card').innerHTML = mounth.value + '/' + year.value.substring(2, 4);
+        " id="mounth">
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+            <option value="06">06</option>
+            <option value="07">07</option>
+            <option value="08">08</option>
+            <option value="09">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+        </select>
+        <select required class="input-card-select" onchange="
+        var mounth = document.getElementById('mounth');
+        var year = document.getElementById('year');
+        document.getElementById('date-card').innerHTML = mounth.value + '/' + year.value.substring(2, 4);
+        " id="year">
+            <option value="{{ i }}"></option>
+        </select><br><br>
+                <input type="text" placeholder="Адрес" class="input-card-number" style="width: 100%;" name="pizza_address"><br><br>
+        <button type="submit" class="button-buy">КУПИТЬ</button><br><br>
+        </form>
+    </div><br><br>
+
+    </div>
+</div>
 
     <footer class="footer-distributed" style="margin-top: 120px;">
 

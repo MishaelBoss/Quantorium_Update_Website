@@ -2,55 +2,100 @@
 <html>
     <head>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/foter.css')}}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/About/main_About.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/panel.css')}}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/QRcode-About.css')}}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/profile Card.css')}}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
         <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
-        <link rel="stylesheet" href="/static/css/Buy-and-cors.css Card.css">
         <link rel="shortcut icon" sizes="32x32" href="{{ url_for('static', filename='icons/Logo.png')}}">
         <title>About</title>
     </head>
 </html>
 <body>
+
   <div class="header">
-    <a class="logo">Космонавтики<img src="/static/icons/rocket.png" style="height: 20px; width: 20px;"></a>
+    <a class="logo">Кванториум-Новоуральск<img src="/static/icons/Logo.png" style="height: 20px; width: 20px;"></a>
     <div class="header-right">
       <a href="/">Главная</a>
-      <a href="/products">Все новости о космосе</a>
-      <a href="/video">Видео о космосе</a>
-      <a href="/tickets">Купить билеты</a>
-      <a href="/login">Войти</a>
+      <a href="/products">Новости</a>
+      <a href="@">Игра об Кванториуме</a>
+      <a href="@">Направления и программы</a>
+      <a href="@">Мероприятия</a>
+      <a href="@">Курсы</a>
+      <a href="/login">Войти на сайт</a>
     </div>
   </div>
 
     <br>
     <header class="header2"  style="margin-top: -17px;">
-      <h1 class="headh1">Обо мне</h1>
+      <h1 class="headh1">Обо нас</h1>
     </header>
 
-    <div class="card" style="margin-top: 40px;">
+  <br><br><br><br>
+<div class="test">
+  <p style="text-align: center; margin-top: 20px; font-size:50px;">Фотокарточки</p>
+</div>
+
+    <div class="Abautcard" style="margin-top: 40px;">
         <div>
-            <img class="img2" src="{{ url_for('static', filename='Profile-Card/I-am-programist.jpg') }}" />
+            <img src="{{ url_for('static', filename='Profile-Card/I-am-programist.jpg') }}" />
         </div>
-        <div class="infos">
+        <div class="AbautInfos">
             <div class="name">
-                <h2>Михаил Яковлев моя фотокарточка</h2>
+                <h2>Михаил Яковлев фотокарточка</h2>
                 <h4>@MichaelBoss</h4>
                 <br>
-                <span>
-                  <img style="border-style: dotted; border-color: aqua; border-radius: 10px; background-color: aliceblue; box-shadow: 5px 5px 20px 2px;" src="{{ url_for('static', filename='images/code/QrCode.gif') }}" />
-                </span>
             </div>
-            <p class="text">Меня зовут Михаил Яковлев и я создател этого сайта</p>
+            <p class="text">Fullstack</p>
             <div class="links">
                 <button class="follow">Мой вк</button>
                 <button class="view">Ютуб канал</button>
             </div>
         </div>
-     </div>
+    </div>
 
+
+
+    <div class="Abautcard" style="margin-top: 40px;">
+      <div>
+          <img src="{{ url_for('static', filename='Profile-Card/Stepa.jpg') }}" />
+      </div>
+      <div class="AbautInfos">
+          <div class="name">
+              <h2>Человек Человек фотокарточка</h2>
+              <h4>@MichaelBoss</h4>
+              <br>
+          </div>
+          <p class="text">Fullstack</p>
+          <div class="links">
+              <button class="follow">Мой вк</button>
+              <button class="view">Ютуб канал</button>
+          </div>
+      </div>
+  </div>
+
+<br><br><br><br>
+<div class="test">
+  <p style="text-align: center; margin-top: 20px; font-size:50px;">Наша команда "Гуманитарии"</p>
+</div>
+
+<div class="Abautcard" style="margin-top: 40px;">
+  <div class="AbautInfos">
+      <div class="name">
+          <br>
+          <span>
+            <img style="
+            border-style: dotted; 
+            border-color: aqua; border-radius: 10px; 
+            background-color: aliceblue; 
+            box-shadow: 5px 5px 20px 2px; 
+            width: fit-content;
+            height: 400px;
+            text-align: center;
+            margin: 0 0 0 420px;" src="{{ url_for('static', filename='Profile-Card/Humanities.jpg') }}"/>
+          </span>
+      </div>
+  </div>
+</div>
 
 
   </nav>

@@ -95,6 +95,10 @@ def Buy():
 def admin():
     return render_template("Admin-Index.html")
 
+@app.route('/game')
+def Game():
+    return render_template("MyGame.html")
+
 @app.route('/it')
 def IT():
     return render_template("IT.html")

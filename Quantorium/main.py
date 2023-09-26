@@ -140,6 +140,10 @@ def Profile():
 def Login():
     return render_template("login.html")
 
+@app.route('/courses')
+def Courses():
+    return render_template("Courses.html")
+
 @app.route('/register')
 def Register():
     return render_template("Register.html")

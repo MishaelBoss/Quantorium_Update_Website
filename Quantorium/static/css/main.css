@@ -11,7 +11,7 @@ canvas{
 }
 
 body{
-  background-color: slategray;
+  background-color: lightgrey;
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
@@ -148,6 +148,7 @@ body{
   }
 
 .test {
+  border-radius: 20px;
   position: relative;
   text-align: center;
   width: 100%;

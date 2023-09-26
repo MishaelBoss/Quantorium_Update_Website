@@ -28,11 +28,14 @@
 }
 
 .h1{
-	color: black;
+	color: #FF9640;
 	position: relative;
 	font-family: "Montserrat", sans-serif;
-	font-size: 7em;
-	font-weight: 700;
+	font-size: 6em;
+}
+
+.h1::first-line{
+	color: #ea4790;
 }
 
 .h2{

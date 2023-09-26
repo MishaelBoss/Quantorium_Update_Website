@@ -186,7 +186,7 @@ body{
   left: -.7red;
 }
 
-.Abautcard img{
+.img{
   margin-right: 15px;
   width: 8rem;
   min-width: 80px;
@@ -255,12 +255,7 @@ body{
   color: #222;
 }
 
-
-
-
-
-
-/* BEGIN CARD DESIGN */
+/* карточка для игры */
 .hero {
   display: inline-block;
   position: relative;
@@ -320,4 +315,46 @@ body{
   color: #fff;
   left: 30px;
   bottom: 10%;
+}
+
+.eight a {
+  top: -12px;
+  left: 200px;
+  border-radius: 10px;
+  background: #E8CCB5;
+  color: #B05151;
+  padding: 15px 30px;
+  position: relative;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+}
+.eight a:before, .eight a:after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: calc(50% - 5px);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #F58262;
+  box-shadow: inset 0 -2px 0 #B05151;
+  opacity: 0;
+  transition: .5s ease-in-out;
+}
+.eight a:before {
+  left: 13px;
+}
+.eight a:after {
+  right: 13px;
+}
+.eight a:hover:before, .eight a:hover:after {
+  opacity: 1;
+}
+
+.ImgSponser{
+  border-style: dotted;  
+  background-color: aliceblue; 
+  box-shadow: 5px 5px 20px 2px; 
+  margin: 0 0 0 420px;
+  width: 150px;
+  height: 150px;
 }

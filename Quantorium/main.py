@@ -128,6 +128,14 @@ def Promrobo():
 def Technical_English():
     return render_template("Technical_English.html")
 
+@app.route('/sponsor')
+def Sponsor():
+    return render_template("Sponsor.html")
+
+@app.route('/profile')
+def Profile():
+    return render_template("Profile.html")
+
 @app.route('/login')
 def Login():
     return render_template("login.html")

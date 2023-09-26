@@ -352,10 +352,19 @@ body{
 }
 
 .ImgSponser{
-  border-style: dotted;  
-  background-color: aliceblue; 
-  box-shadow: 5px 5px 20px 2px; 
-  margin: 0 0 0 420px;
+  border-style: dotted;
+  background-color: aliceblue;
+  box-shadow: 5px 6px 20px 2px;
+  margin-right: auto;
+  margin-left: auto;
   width: 150px;
   height: 150px;
+  display: block;
+  margin-top: 20px;
+}
+
+.NameProfel {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
 }

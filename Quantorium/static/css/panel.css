@@ -4,7 +4,7 @@
   padding: 15px 10px;
   background-color: rgb(255, 255, 255, .95);
   top: 0;
-  padding: 10px;
+  padding: 5px;
   z-index: 1000;
   -webkit-box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
@@ -37,7 +37,32 @@
 }
 
 .header-right {
+  position: relative;
   float: right;
+  top: 2px;
+}
+
+.ProfilePanel{
+  top: 5px;
+  height: 40px;
+  width: 152px;
+  display: flex;
+  position: relative;
+}
+
+.ProfilePanel a{
+  position: relative;
+  display: flex;
+  bottom: 2px;
+  left: 10px;
+  align-items: center;
+}
+
+.ProfilePanel img{
+  position: relative;
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
 }
 
 @media screen and (max-width: 500px) {

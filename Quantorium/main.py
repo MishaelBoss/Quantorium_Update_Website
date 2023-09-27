@@ -20,6 +20,17 @@ class Article(db.Model):
     def __repr__(self):
         return '<Article %r>' % self.id
     
+class Courses(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    image = db.Column(db.LargeBinary)
+    title = db.Column(db.String(60), nullable=False)
+    intro = db.Column(db.String(100), nullable=False)
+    text = db.Column(db.Text(), nullable=False)
+    date = db.Column(db.DateTime(), default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<Courses %r>' % self.id
+    
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     login = db.Column(db.String(150), nullable=False)

@@ -31,26 +31,6 @@ class Courses(db.Model):
 
     def __repr__(self):
         return f"<users {self.id}>"
-    
-class Users(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    login = db.Column(db.String(150), nullable=False)
-    email = db.Column(db.String(150), nullable=False)
-    password = db.Column(db.String(150), nullable=False)
-    dateR = db.Column(db.DateTime, default=datetime.utcnow())
-
-    pr = db.relationship('Profiles', backref='users' , uselist=False)
-
-    def __repr__(self):
-        return f"<users {self.id}]>"
-    
-class Profiles(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=True)
-    old = db.Column(db.Integer)
-    city = db.Column(db.String(100))
-
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 def __repr__(self):
     return f"<profiles {self.id}>"
@@ -67,52 +47,15 @@ def about():
 
 @app.route("/register", methods=("POST", "GET"))
 def register():
-    if request.method == "POST":
-        # здесь должна быть проверка корректности введенных данных
-        try:
-            hash = generate_password_hash(request.form['psw'])
-            u = Users(email=request.form['email'], psw=hash)
-            db.session.add(u)
-            db.session.flush()
-
-            p = Profiles(name=request.form['name'], old=request.form['old'],
-                        city=request.form['city'], user_id = u.id)
-            db.session.add(p)
-            db.session.commit()
-        except:
-            db.session.rollback()
-            print("Ошибка добавления в БД")
-
-        return redirect(url_for('index'))
-
     return render_template("register.html", title="Регистрация")
 
 @app.route('/login', methods=['POST', "GET"])
 def login():
-    name = request.cookies.get('user')
-    if request.method == "POST":
-        login = request.form['login']
-        passw1 = request.form['password']
-        password = hashlib.md5(passw1.encode("utf-8")).hexdigest()
-        exists = db.session.query(Users.id).filter_by(login=login, password=password).first() is not None
-        user = db.session.query(Users.login).filter_by(login=login, password=password).first()
-        if exists:
-            resp = make_response(redirect("/"))
-            resp.set_cookie('user', user[0])
-            return resp
-        else:
-            return redirect("/login")
-    else:
         return render_template("login.html")
 
 @app.route('/profile')
 def profile():
-    info = []
-    try:
-        info = Users.query.all()
-    except:
-        print("Ошибка")
-    return render_template("profile.html", list=info)
+    return render_template("profile.html")
 
 @app.route('/Buy')
 def Buy():

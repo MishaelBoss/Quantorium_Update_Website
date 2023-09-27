@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect, make_response
+from flask import Flask, render_template, request, redirect, make_response, url_for
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 import hashlib
 
@@ -29,7 +30,7 @@ class Courses(db.Model):
     date = db.Column(db.DateTime(), default=datetime.utcnow)
 
     def __repr__(self):
-        return '<Courses %r>' % self.id
+        return f"<users {self.id}>"
     
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -38,9 +39,22 @@ class Users(db.Model):
     password = db.Column(db.String(150), nullable=False)
     dateR = db.Column(db.DateTime, default=datetime.utcnow())
 
+    pr = db.relationship('Profiles', backref='users' , uselist=False)
+
     def __repr__(self):
-        return '<Users %r>' % self.id
+        return f"<users {self.id}]>"
     
+class Profiles(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=True)
+    old = db.Column(db.Integer)
+    city = db.Column(db.String(100))
+
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+def __repr__(self):
+    return f"<profiles {self.id}>"
+
 
 @app.route('/')
 @app.route('/home')
@@ -51,30 +65,27 @@ def index():
 def about():
     return render_template("About.html")
 
-@app.route('/register', methods=['POST', 'GET'])
+@app.route("/register", methods=("POST", "GET"))
 def register():
-    name = request.cookies.get('user')
     if request.method == "POST":
-        login = request.form['login']
-        email = request.form['email']
-        passw1 = request.form['password']
-        password = hashlib.md5(passw1.encode("utf-8")).hexdigest()
-        exists = db.session.query(Users.id).filter_by(login=login).first() is not None or db.session.query(Users.id).filter_by(email=email).first() is not None
-        if not exists:
-            user = Users(login=login, password=password, email=email)
-            try:
-                db.session.add(user)
-                db.session.commit()
-                resp = make_response(redirect("/"))
-                resp.set_cookie('user', user.login)
-                return resp
-            except Exception as ex:
-                print(ex)
-                return redirect("/register")
-        else:
-            return redirect("/register")
-    else:
-        return render_template("register.html")
+        # здесь должна быть проверка корректности введенных данных
+        try:
+            hash = generate_password_hash(request.form['psw'])
+            u = Users(email=request.form['email'], psw=hash)
+            db.session.add(u)
+            db.session.flush()
+
+            p = Profiles(name=request.form['name'], old=request.form['old'],
+                        city=request.form['city'], user_id = u.id)
+            db.session.add(p)
+            db.session.commit()
+        except:
+            db.session.rollback()
+            print("Ошибка добавления в БД")
+
+        return redirect(url_for('index'))
+
+    return render_template("register.html", title="Регистрация")
 
 @app.route('/login', methods=['POST', "GET"])
 def login():
@@ -96,7 +107,12 @@ def login():
 
 @app.route('/profile')
 def profile():
-    return render_template("profile.html")
+    info = []
+    try:
+        info = Users.query.all()
+    except:
+        print("Ошибка")
+    return render_template("profile.html", list=info)
 
 @app.route('/Buy')
 def Buy():

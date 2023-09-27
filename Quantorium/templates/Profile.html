@@ -28,6 +28,15 @@
         </div>
     </div>
 </div>
+{% for U in list %}
+<li><p>id: {{U.id}}, email: {{U.email}}</p>
+  <ul>
+    <li>Имя {{U.pr.name}}</li>
+    <li>Ааыа {{U.pr.old}}</li>
+    <li>Город {{U.pr.city}}</li>
+  </ul>
+</li>
+{% endfor %}
 
 <br>
 
@@ -38,8 +47,8 @@
     <div class="AbautInfos">
         <div class="name">
             <div class="NameProfel">
-                <h2>Имя:</h2>
-                <h3>Михаил</h3>
+              <h2>Фамилия:</h2>
+              <h3>Яковлев</h3>
             </div>
             <div class="NameProfel">
                 <h2>Фамилия:</h2>

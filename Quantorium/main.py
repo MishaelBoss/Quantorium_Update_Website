@@ -30,11 +30,7 @@ class Courses(db.Model):
     date = db.Column(db.DateTime(), default=datetime.utcnow)
 
     def __repr__(self):
-        return f"<users {self.id}>"
-
-def __repr__(self):
-    return f"<profiles {self.id}>"
-
+        return '<Courses %r>' % self.id
 
 @app.route('/')
 @app.route('/home')

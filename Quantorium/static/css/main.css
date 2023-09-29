@@ -375,3 +375,39 @@ body{
 .FontsText p h1 h2 h3 h4{
   font-family: 'Comfortaa', cursive;
 }
+
+.News-card {
+  width: 450px;
+  background: rgba(255, 255, 255, .5);
+  padding: 4rem;
+  border-radius: 10px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  bottom: -70px;
+}
+
+.News-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, .15);
+  transform: rotate(-6deg);
+  border-radius: 10px;
+  z-index: -1;
+}
+
+.News-card-logo img {
+  width: 60px;
+}
+
+.News-card-logo,
+.News-card-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.Btn_detail{
+  display: flex;
+  bottom: 10px;
+}

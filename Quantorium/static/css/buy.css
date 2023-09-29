@@ -9,7 +9,7 @@
 }
 
 .container{
-    background-image: url(/static/images/card.jpg);
+    background-image: url(/static/images/cart.png);
     position: relative;
     align-items: center;
     justify-content: center;

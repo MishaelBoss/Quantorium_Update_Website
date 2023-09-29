@@ -1,3 +1,5 @@
+
+
 *{
   margin: 0;
   padding: 0;
@@ -63,7 +65,7 @@ body{
     position: relative;
     max-width: 250px;
     max-height: 350px;
-    box-shadow: 0 40px 60px -6px black;
+    box-shadow: 0 12px 20px -6px black;
   }
   
   .card-title {
@@ -367,4 +369,9 @@ body{
   display: flex;
   align-items: flex-end;
   justify-content: space-around;
+}
+
+/* новые шрифты */
+.FontsText p h1 h2 h3 h4{
+  font-family: 'Comfortaa', cursive;
 }

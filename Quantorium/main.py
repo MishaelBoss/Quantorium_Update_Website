@@ -40,6 +40,10 @@ def index():
 def about():
     return render_template("About.html")
 
+@app.route('/stepa')
+def Stepa():
+    return render_template("Stepa_about.html")
+
 @app.route("/register", methods=("POST", "GET"))
 def register():
     return render_template("register.html", title="Регистрация")

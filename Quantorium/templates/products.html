@@ -16,15 +16,45 @@
     <div class="header-right">
       <a href="/">Главная</a>
       <a class="active" href="/products">Новости</a>
-      <a href="3">Игра об Кванториуме</a>
-      <a href="/video">Направления и программы</a>
-      <a href="/tickets">Мероприятия</a>
-      <a href="/login">Курсы</a>
+      <a href="game">Игра об Кванториуме</a>
+      <a href="@">Направления и программы</a>
+      <a href="@">Мероприятия</a>
+      <a href="/courses">Курсы</a>
+      <a href="/login">Войти на сайт</a>
+      <div class="ProfilePanel">
+        <a href="profile"><img src="/static/Profile-Card/Stepa.jpg">Профиль</a>
+      </div>
     </div>
   </div>
 
 <br><br><br><br>
 <h1 style="text-align: center; color: blueviolet; font-family: Impact, Haettenschweiler">Новости от админа</h1>
+
+<div style="position: relative; text-align: center;">
+{% if articles|length > 0 %}
+  {% for el in articles%}
+  <div class="first hero">
+    <img class="hero-profile-img" src="/static/images/BG/BgVR.jpg">
+    <div class="hero-description-bk"></div>
+    <div class="hero-logo">
+      <img src="/static/icons/VRAR-квантум.png">
+    </div>
+    <div class="hero-description">
+      <h2 style="font-family: 'Comfortaa', cursive;"> {{ el.title }} </h2>
+      <p style="font-family: 'Comfortaa', cursive;"> {{ el.intro }} </p>
+    </div>
+    <div  class="hero-date">
+      <p style="font-family: 'Comfortaa', cursive;"><b>Дата: {{ el.date.date() }} </b></p>
+      <div class="eight">
+        <a href="vr">Подробно</a>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+{% else %}
+<p>У нас еще нет статей на сайте если хотите их добавить напешите в адресной строке http://127.0.0.1:5000/Admin</p>
+{% endif %}
+</div>
 
   <div class="Abautcard">
     <div class="AbautInfos" style="margin-left: auto; margin-right: auto;">

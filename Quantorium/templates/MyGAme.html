@@ -5,6 +5,7 @@
       <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
       <link rel="stylesheet" href="{{ url_for('static', filename='css/panel.css')}}">
       <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/main-product.css')}}">
       <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
       <link rel="shortcut icon" sizes="32x32" href="{{ url_for('static', filename='icons/Logo.png')}}">
       <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,11 +19,14 @@
     <div class="header-right">
       <a href="/">Главная</a>
       <a href="/products">Новости</a>
-      <a class="active" ref="game">Игра об Кванториуме</a>
+      <a class="active" href="game">Игра об Кванториуме</a>
       <a href="@">Направления и программы</a>
       <a href="@">Мероприятия</a>
-      <a href="@">Курсы</a>
+      <a href="/courses">Курсы</a>
       <a href="/login">Войти на сайт</a>
+      <div class="ProfilePanel">
+        <a href="profile"><img src="/static/Profile-Card/Stepa.jpg">Профиль</a>
+    </div>
     </div>
   </div>
 
@@ -137,9 +141,22 @@
 
 <br><br><br><br>
 <div class="test">
-  <div class="links">
-    <button class="follow"><a href="https://drive.google.com/drive/folders/1u7Yv7gbpGpKaJSKcgmUSTj9Ikn0KMiPu?usp=drive_link">Скачать с google</a></button>
-    <button class="view"><a href="https://github.com/MishaelBoss/The_World_of_Quantrianism_for_Android">Скачать с github</a></button>
+  <div style="display: flex; justify-content: center;">
+    <a class="view, button-28" href="https://drive.google.com/drive/folders/1u7Yv7gbpGpKaJSKcgmUSTj9Ikn0KMiPu?usp=drive_link" style="
+    border-radius: 4rem; 
+    width: 150px; 
+    height: 20px; 
+    min-height: 50px;
+    display: grid;
+    align-content: center;">Скачать с google</a>
+    <a class="view, button-28" href="https://github.com/MishaelBoss/The_World_of_Quantrianism_for_Android" style="
+    border-radius: 4rem; 
+    width: 150px; 
+    height: 20px; 
+    min-height: 50px;
+    display: grid;
+    margin-left: 10px;
+    align-content: center;">Скачать с github</a>
 </div>
 </div>
 

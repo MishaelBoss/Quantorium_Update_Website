@@ -29,6 +29,7 @@
     </div>
 </div>
 
+
 <div class="News-card" style="bottom: -150px;">
   <div class="News-card-logo">
     <img src="{{ url_for('static', filename='Profile-Card/Stepa.jpg') }}" style="border-radius: 50%;" alt="logo">
@@ -37,7 +38,11 @@
     <div class="NameProfel">
       <h2>Фамилия:</h2>
       <h3>Яковлев</h3>
-      <h1>{{ name }}</h1>
+      {% if 'user_id' in session %}
+        <h3>Logged in as {{ user.name }}</h3>
+        <a href="/logout">Logout</a>
+      {% else %}
+      {% endif %}
     </div>
     <div class="NameProfel">
         <h2>Имя:</h2>

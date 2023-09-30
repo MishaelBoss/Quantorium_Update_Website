@@ -102,6 +102,10 @@ def Buy():
 def admin():
     return render_template("Admin-Index.html")
 
+@app.route('/direction_and_programs')
+def Direction_and_programs():
+    return render_template("direction_and_programs.html")
+
 @app.route('/game')
 def Game():
     return render_template("MyGame.html")

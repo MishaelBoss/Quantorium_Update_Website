@@ -1,12 +1,12 @@
-from flask import Flask, render_template, request, redirect, make_response, url_for
+from flask import Flask, render_template, request, redirect, make_response, url_for, session
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-import hashlib
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
 HOST = '0.0.0.0'
 PORT = 5000
+DEBUG = True
 server_address = '127.0.0.1:5000'
 db = SQLAlchemy(app)
 
@@ -30,31 +30,69 @@ class Courses(db.Model):
 
     def __repr__(self):
         return '<Courses %r>' % self.id
+    
+class User(db.Model):
+    __tablename__ = 'User'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(60), unique=True, nullable=False)
+    email = db.Column(db.String(150), nullable=False, unique=True)
+    password = db.Column(db.Text(), nullable=False)
+    date = db.Column(db.DateTime(), default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<User %r>' % self.id
+
 
 @app.route('/')
 @app.route('/home')
 def index():
     return render_template("Index.html")
 
-@app.route('/About')
-def about():
-    return render_template("About.html")
-
-@app.route('/stepa')
-def Stepa():
-    return render_template("Stepa_about.html")
-
 @app.route("/register", methods=("POST", "GET"))
 def register():
-    return render_template("register.html", title="Регистрация")
+    if request.method == "POST":
+        name = request.form['name']
+        email = request.form['email']
+        password = request.form['password']
+
+        user = User.query.filter_by(name=name).first()
+        if user:
+            return 'Имя пользователя уже существует'
+
+        try:
+            new_user = User(name=name, email=email, password=password)
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect('/login')
+        except:
+            return "Что то пошло не так"
+    else:
+            return render_template("register.html")
 
 @app.route('/login', methods=['POST', "GET"])
 def login():
-        return render_template("login.html")
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        password = request.form['password']
+
+        user = User.query.filter_by(name=name).first()
+        if user and user.password == password and user.email == email:
+            session['user_id'] = user.id
+            return redirect('/')
+        else:
+            return 'Неверный пароль или имя!'
+    
+    return render_template('login.html')
 
 @app.route('/profile')
 def profile():
-    return render_template("profile.html")
+    return render_template('profile.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    return redirect('/')
 
 @app.route('/Buy')
 def Buy():
@@ -113,9 +151,13 @@ def Login():
 def Courses():
     return render_template("Courses.html")
 
-@app.route('/register')
-def Register():
-    return render_template("Register.html")
+@app.route('/About')
+def about():
+    return render_template("About.html")
+
+@app.route('/stepa')
+def Stepa():
+    return render_template("Stepa_about.html")
 
 @app.route('/products')
 def products():

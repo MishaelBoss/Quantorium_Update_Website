@@ -12,59 +12,76 @@
     </head>
 </html>
 <body>
+  <div class="header">
+    <a class="logo">Кванториум-Новоуральск<img src="/static/icons/Logo.png" style="height: 20px; width: 20px;"></a>
+    <div class="header-right">
+      <a href="/">Главная</a>
+      <a href="/products">Новости</a>
+      <a href="/Create-product">Создать новый пост</a>
+      <a href="game">Игра об Кванториуме</a>
+      <a href="@">Направления и программы</a>
+      <a href="@">Мероприятия</a>
+      <a href="/courses">Курсы</a>
+      <div class="ProfilePanel">
+        <a href="profile"><img src="/static/Profile-Card/Stepa.jpg">Профиль</a>
+    </div>
+    </div>
+  </div>
+  <br>
     <h1 style="text-align: center;">Обновить пост</h1>
+    <br><br>
 
-
-     <div class="card">
-        <div class="infos">
-                <form method="post">
-                  <input type="text" name="title" value="{{ article.title }}" placeholder="Введите текст" id="title"><br>
-                  <textarea class="" name="intro" id="intro" cols="30" rows="10" placeholder="Введите текст">{{ article.intro }}</textarea><br>
-                  <textarea name="text" id="text" cols="30" rows="10" placeholder="Введите текст">{{ article.text }}</textarea><br>
-                  <input class="view, button-28"" type="submit" class="menu" value="Обновить">
-                </form>
-        </div>
-     </div>
-
-  </nav>
-
-    <div class="container">
-        <div class="row">
-          <div class="col-md-6 col-lg-4">
-
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-lg-4">
-
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-lg-4">
-
-          </div>
-        </div>
+    <div class="card" style="max-width: 1300px; max-height: 1300px; margin-left: auto; margin-right: auto; border-radius: 4rem;">
+      <div class="infos" style="text-align: center;">
+              <form method="post">
+                <input type="text" name="title" id="title" value="Имя поста" style="font-family: 'Comfortaa', cursive;"><br>
+                <textarea name="intro" id="intro" cols="30" rows="10" style="font-family: 'Comfortaa', cursive;">{{ article.intro }}</textarea><br>
+                <textarea name="text" id="text" cols="30" rows="10" style="font-family: 'Comfortaa', cursive;">{{ article.text }}</textarea><br>
+                <input class="view, button-28" type="submit" value="Обновить" style="border-radius: 4rem; width: 500px;">
+              </form>
       </div>
+   </div>
 
-    <footer class="footer-distributed">
+      <footer class="footer-distributed">
 
-      <div class="footer-right">
-        <a href="https://www.youtube.com/channel/UCgMNXe8ooAQdunLHOkztAew"><i class="fa fa-youtube"></i></a>
-        <a href="https://t.me/+44uvzl2TzSo5NGEy"><i class="fa fa-telegram"></i></a>
-        <a href="https://vk.com/id597169928"><i class="fa fa-vk"></i></a>
-        <a href="https://github.com/MishaelBoss"><i class="fa fa-github"></i></a>
-      </div>
-
-      <div class="footer-left">
-
-        <p class="footer-links">
-          <a class="link-1" href="/">Главная</a>
-          <a href="https://www.youtube.com/channel/UCgMNXe8ooAQdunLHOkztAew">Мой блог</a>
-          <a href="/About">Обо мне</a>
-        </p>
-
-        <p>Mikhaelovsk &copy; 2023</p>
-      </div>
-
-    </footer>
+        <div class="footer-right">
+          <br>
+          <a href="https://www.youtube.com/channel/UCgMNXe8ooAQdunLHOkztAew"><i class="fa fa-youtube"></i></a>
+          <a href="https://t.me/+44uvzl2TzSo5NGEy"><i class="fa fa-telegram"></i></a>
+          <a href="https://vk.com/id597169928"><i class="fa fa-vk"></i></a>
+          <a href="https://github.com/MishaelBoss"><i class="fa fa-github"></i></a>
+        </div>
+  
+        <div class="footer-left">
+  
+          <p class="footer-links">
+            <a class="link-1" href="/">Главная</a>
+  
+            <a href="https://www.youtube.com/channel/UCgMNXe8ooAQdunLHOkztAew">Мой блог</a>
+  
+            <a href="/About">Обо мне</a>
+          </p>
+  
+          <div class="footer-center">
+  
+            <div>
+              <i class="fa fa-map-marker"></i>
+              <p><span>Обл: Свердловская</span>Город: Новоуральск</p>
+            </div>
+    
+            <div>
+              <i class="fa fa-phone"></i>
+              <p>+7.902.446.4388</p>
+            </div>
+    
+            <div>
+              <i class="fa fa-envelope"></i>
+              <p><a href="mailto:support@company.com">michaelvoov@yandex.ru</a></p>
+            </div>
+    
+          </div>
+  
+          <p style="margin-left: 820px;">Mikhaelovsk &copy; 2023</p>
+        </div>
+      </footer>
 </body>

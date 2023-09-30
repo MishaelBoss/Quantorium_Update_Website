@@ -5,6 +5,7 @@
       <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
       <link rel="stylesheet" href="{{ url_for('static', filename='css/panel.css')}}">
       <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/main-product.css')}}">
       <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
       <link rel="shortcut icon" sizes="32x32" href="{{ url_for('static', filename='icons/Logo.png')}}">
       <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +13,6 @@
     </head>
 </html>
 <body>
-
 <div class="header">
     <a class="logo">Кванториум-Новоуральск<img src="/static/icons/Logo.png" style="height: 20px; width: 20px;"></a>
     <div class="header-right">
@@ -28,35 +28,36 @@
         </div>
     </div>
 </div>
-{% for U in list %}
-<li><p>id: {{U.id}}, email: {{U.email}}</p>
-  <ul>
-    <li>Имя {{U.pr.name}}</li>
-    <li>Ааыа {{U.pr.old}}</li>
-    <li>Город {{U.pr.city}}</li>
-  </ul>
-</li>
-{% endfor %}
 
-<br>
-
-<div class="Abautcard" style="margin-top: 40px; position: relative; width: 400px;">
-    <div>
-        <img class="img" src="{{ url_for('static', filename='Profile-Card/I-am-programist.jpg') }}" />
+<div class="News-card" style="bottom: -150px;">
+  <div class="News-card-logo">
+    <img src="{{ url_for('static', filename='Profile-Card/Stepa.jpg') }}" style="border-radius: 50%;" alt="logo">
+  </div>
+  <div class="News-card-header">
+    <div class="NameProfel">
+      <h2>Фамилия:</h2>
+      <h3>Яковлев</h3>
+      <h1>{{ name }}</h1>
     </div>
-    <div class="AbautInfos">
-        <div class="name">
-            <div class="NameProfel">
-              <h2>Фамилия:</h2>
-              <h3>Яковлев</h3>
-            </div>
-            <div class="NameProfel">
-                <h2>Фамилия:</h2>
-                <h3>Яковлев</h3>
-            </div>
-            <br>
-        </div>
+    <div class="NameProfel">
+        <h2>Имя:</h2>
+        <h3>Михаил</h3>
     </div>
+    <div class="NameProfel" style="font-size: 12px;">
+      <h2>Дата создание аккаунта:</h2>
+      <h3>20.02.2023</h3>
+    </div>
+  </div>
+  <div class="Btn_detail">
+    <a class="view, button-28" style="
+    border-radius: 4rem; 
+    width: 150px; 
+    height: 20px; 
+    min-height: 50px;
+    margin: auto;
+    display: grid;
+    align-content: center;">Изменить аккаунт</a>
+  </div>
 </div>
 
 <footer class="footer-distributed" style="margin-top: 340px;">

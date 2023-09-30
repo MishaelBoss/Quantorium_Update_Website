@@ -41,7 +41,7 @@
       <p style="font-family: 'Comfortaa', cursive;"><b>Дата: {{ article.date.date() }} </b></p>
   </div>
   <div class="Btn_detail">
-    <a class="view, button-28" style="
+    <a class="view, button-28" href="/products/{{ article.id }}/update" style="
     border-radius: 4rem; 
     width: 150px; 
     height: 20px; 
@@ -49,7 +49,7 @@
     display: grid;
     align-content: center;">Изменить</a>
 
-    <a class="view, button-28" style="
+    <a class="view, button-28" href="/products/{{ article.id }}/del" style="
     position: relative;
     left: 20px;
     border-radius: 4rem; 

@@ -177,6 +177,10 @@ def about():
 def Stepa():
     return render_template("Stepa_about.html")
 
+@app.route('/event')
+def event():
+    return render_template("event.html")
+
 @app.route('/create_feedback', methods=["POST", "GET"])
 def create_feedback():
     if request.method == "POST":

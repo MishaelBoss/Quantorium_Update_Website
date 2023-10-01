@@ -65,6 +65,8 @@
   border-radius: 50%;
   height: 35px;
   width: 35px;
+  border: solid;
+  color: green;
 }
 
 @media screen and (max-width: 500px) {

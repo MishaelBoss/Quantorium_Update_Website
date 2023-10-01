@@ -388,3 +388,23 @@ body{
   display: flex;
   bottom: 10px;
 }
+
+/* css для обратной связи ошибка & отправка */
+.flash {padding: 10px;}
+.flash.success {
+         border: 1px solid #21DB56;
+         background: #AEFFC5;
+}
+.flash.error {
+         border: 1px solid #FF4343;
+         background: #FF9C9C;
+}
+
+.hr-washed {
+	margin: 20px 0;
+	padding: 0;
+	height: 10px;
+	border: none;
+	border-top: 1px solid #333;
+	box-shadow: 0 10px 10px -10px #8c8b8b inset;
+}

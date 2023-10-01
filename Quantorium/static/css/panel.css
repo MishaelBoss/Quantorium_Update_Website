@@ -18,7 +18,7 @@
   text-decoration: none;
   font-size: 18px;
   line-height: 25px;
-  border-radius: 4px;
+  border-radius: 30px;
 }
 
 .header a.logo {
@@ -37,6 +37,7 @@
 }
 
 .header-right {
+  display: flex;
   position: relative;
   float: right;
   top: 2px;
@@ -48,6 +49,7 @@
   width: 152px;
   display: flex;
   position: relative;
+  justify-content: flex-end;
 }
 
 .ProfilePanel a{

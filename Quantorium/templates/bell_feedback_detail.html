@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/foter.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main-product.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/panel.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/profile Card.css')}}">
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+        <link rel="shortcut icon" sizes="32x32" href="{{ url_for('static', filename='icons/Logo.png')}}">
+        <title>{{ bell.title }}</title>
+    </head>
+</html>
+<body>
+<div class="header">
+  <a class="logo">Кванториум-Новоуральск<img src="/static/icons/Logo.png" style="height: 20px; width: 20px;"></a>
+  <div class="header-right">
+    <a href="/Admin">Главная</a>
+    <a href="/products">Новости</a>
+    <a href="/Create-product">Создать новость</a>
+    <a href="/game">Игра об Кванториуме</a>
+    <a href="/direction_and_programs">Направления и программы</a>
+    <a href="@">Мероприятия</a>
+    <a href="/courses">Курсы</a>
+    <a href="/login">Войти на сайт</a>
+    <div class="ProfilePanel">
+      <a href="profile"><img src="/static/Profile-Card/Stepa.jpg">Профиль</a>
+    </div>
+    <div class="ProfilePanel">
+      <a class="active" href="/bell"><img src="/static/icons/bell.png">Сообщение</a>
+    </div>
+  </div>
+</div>
+
+  <br>
+
+<div class="News-card">
+  <div class="News-card-header">
+      <h1 style="font-family: 'Comfortaa', cursive;">Имя: {{ bell.name }}</h1>
+      <h2 style="font-family: 'Comfortaa', cursive;">Фамилия: {{ bell.surname }}</h2>
+      <hr class="hr-washed">
+      <p style="font-family: 'Comfortaa', cursive;"><b>Заголовок о проблемы: {{ bell.title }}</p>
+      <p style="font-family: 'Comfortaa', cursive;"><b>Полное описание: {{ bell.text }} </b></p>
+      <hr class="hr-washed">
+      <p style="font-family: 'Comfortaa', cursive;"><b>email: {{ bell.email }}</p>
+      <p style="font-family: 'Comfortaa', cursive;"><b>телефон: {{ bell.number }} </b></p>
+      <hr class="hr-washed">
+      <p style="font-family: 'Comfortaa', cursive;"><b>Дата: {{ bell.date.date() }} </b></p>
+  </div>
+  <div class="Btn_detail">
+    <a class="view, button-28" href="/products/{{ bell.id }}/del" style="
+    position: relative;
+    border-radius: 4rem; 
+    width: 150px; 
+    height: 20px; 
+    min-height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    align-content: center;">Удалить</a>
+  </div>
+</div>
+
+
+<footer class="footer-distributed" style="bottom: -200px;">
+  <div class="footer-left">
+    <p class="footer-links">
+      <a class="link-1" href="/">Главная</a>
+      <a href="/game">Игра об Кванториум</a>
+      <a href="/About">Обо нас</a>
+      <a href="/sponsor">Спонсоры</a>
+      <a href="/create_feedback">Обратная связь</a>
+    </p>
+    <div class="footer-center">
+      <div>
+        <i class="fa fa-map-marker"></i>
+        <p><span>Обл: Свердловская</span>Город: Новоуральск</p>
+      </div>
+      <div>
+        <i class="fa fa-phone"></i>
+        <p>+7.902.456.76.99</p>
+      </div>
+      <div>
+        <i class="fa fa-envelope"></i>
+        <p><a href="mailto:Qvant323@yandex.ru">Qvant323@yandex.ru</a></p>
+      </div>
+    </div>
+    <p style="margin-left: 820px;">Mikhaelovsk &copy; 2023</p>
+  </div>
+</footer>
+</body>

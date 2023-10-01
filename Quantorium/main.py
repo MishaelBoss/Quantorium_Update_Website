@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, make_response, url_for, session
+from flask import Flask, render_template, request, redirect, make_response, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -20,21 +20,24 @@ class Article(db.Model):
     def __repr__(self):
         return '<Article %r>' % self.id
     
-class Courses(db.Model):
+class Feedback(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    image = db.Column(db.LargeBinary)
+    name = db.Column(db.String(60), unique=True, nullable=False)
+    surname = db.Column(db.String(60), nullable=False, unique=False)
+    email = db.Column(db.String(150), nullable=False, unique=True)
+    number = db.Column(db.String(60), nullable=False)
     title = db.Column(db.String(60), nullable=False)
-    intro = db.Column(db.String(100), nullable=False)
     text = db.Column(db.Text(), nullable=False)
     date = db.Column(db.DateTime(), default=datetime.utcnow)
 
     def __repr__(self):
-        return '<Courses %r>' % self.id
+        return '<Feedback %r>' % self.id
     
 class User(db.Model):
     __tablename__ = 'User'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), unique=True, nullable=False)
+    surname = db.Column(db.String(60), unique=True, nullable=False)
     email = db.Column(db.String(150), nullable=False, unique=True)
     password = db.Column(db.Text(), nullable=False)
     date = db.Column(db.DateTime(), default=datetime.utcnow)
@@ -52,6 +55,7 @@ def index():
 def register():
     if request.method == "POST":
         name = request.form['name']
+        surname = request.form['surname']
         email = request.form['email']
         password = request.form['password']
 
@@ -60,7 +64,7 @@ def register():
             return 'Имя пользователя уже существует'
 
         try:
-            new_user = User(name=name, email=email, password=password)
+            new_user = User(name=name, surname=surname, email=email, password=password)
             db.session.add(new_user)
             db.session.commit()
             return redirect('/login')
@@ -73,6 +77,7 @@ def register():
 def login():
     if request.method == 'POST':
         name = request.form['name']
+        surname = request.form['surname']
         email = request.form['email']
         password = request.form['password']
 
@@ -87,7 +92,12 @@ def login():
 
 @app.route('/profile')
 def profile():
-    return render_template('profile.html')
+    info = []
+    try:
+        info = User.query.all()
+    except:
+        print("Ошибка")
+    return render_template('profile.html', list=info)
 
 @app.route('/logout')
 def logout():
@@ -147,6 +157,10 @@ def Sponsor():
 def Profile():
     return render_template("Profile.html")
 
+@app.route('/account_change')
+def account_change():
+    return render_template("account_change.html")
+
 @app.route('/login')
 def Login():
     return render_template("login.html")
@@ -162,6 +176,47 @@ def about():
 @app.route('/stepa')
 def Stepa():
     return render_template("Stepa_about.html")
+
+@app.route('/create_feedback', methods=["POST", "GET"])
+def create_feedback():
+    if request.method == "POST":
+        name = request.form['name']
+        surname = request.form['surname']
+        email = request.form['email']
+        number = request.form['number']
+        title = request.form['title']
+        text = request.form['text']
+
+        bell = Feedback(name=name, surname=surname, email=email, number=number, title=title, text=text)
+
+        try:
+            db.session.add(bell)
+            db.session.commit()
+            return redirect('/')
+        except:
+            return "Ошибка"
+    else:
+            return render_template("create_feedback.html")
+
+@app.route('/bell')
+def Bell():
+    bell = Feedback.query.order_by(Feedback.date.desc()).all()
+    return render_template("bell.html", bell=bell)
+
+@app.route('/bell_feedback_detail/<int:id>')
+def bell_feedback_detail(id):
+    bell = Feedback.query.get(id)
+    return render_template("bell_feedback_detail.html", bell=bell)
+
+@app.route('/feedback/<int:id>/del')
+def Feedback_delete(id):
+    Bell = Feedback.query.get_or_404(id)
+    try:
+        db.session.delete(Bell)
+        db.session.commit()
+        return redirect('/bell')
+    except:
+        return "При удаление ароизошла ошибка"
 
 @app.route('/products')
 def products():

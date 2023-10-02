@@ -33,6 +33,17 @@ class Feedback(db.Model):
     def __repr__(self):
         return '<Feedback %r>' % self.id
     
+class Comment(db.Model):
+    __tablename__ = 'comments'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(60), unique=True, nullable=False)
+    body = db.Column(db.Text(1000), nullable=False)
+    date_posted = db.Column(db.DateTime(), nullable=False, default=datetime.utcnow)
+    post_id = db.Column(db.Integer, db.ForeignKey('posts_id', ondelete='CASCADE'), nullable=False)
+
+    def __repr__(self):
+        return f'Comment({self.body}, {self.date_posted.strftime("%d.%m.%Y-%H.%M")}, {self.post_id})'
+    
 class User(db.Model):
     __tablename__ = 'User'
     id = db.Column(db.Integer, primary_key=True)
@@ -180,6 +191,10 @@ def Stepa():
 @app.route('/event')
 def event():
     return render_template("event.html")
+
+@app.route('/comment')
+def Comments():
+    return render_template("add_comments.html")
 
 @app.route('/create_feedback', methods=["POST", "GET"])
 def create_feedback():

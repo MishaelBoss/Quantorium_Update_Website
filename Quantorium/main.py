@@ -37,12 +37,12 @@ class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), unique=True, nullable=False)
-    body = db.Column(db.Text(1000), nullable=False)
-    date_posted = db.Column(db.DateTime(), nullable=False, default=datetime.utcnow)
-    post_id = db.Column(db.Integer, db.ForeignKey('posts_id', ondelete='CASCADE'), nullable=False)
+    title = db.Column(db.String(60), nullable=False)
+    text = db.Column(db.Text(1100), nullable=False)
+    date_post = db.Column(db.DateTime(), default=datetime.utcnow)
 
     def __repr__(self):
-        return f'Comment({self.body}, {self.date_posted.strftime("%d.%m.%Y-%H.%M")}, {self.post_id})'
+        return '<Comment %r>' % self.id
     
 class User(db.Model):
     __tablename__ = 'User'
@@ -192,9 +192,24 @@ def Stepa():
 def event():
     return render_template("event.html")
 
-@app.route('/comment')
+@app.route('/create_comment', methods=["POST", "GET"])
 def Comments():
-    return render_template("add_comments.html")
+        if request.method == "POST":
+            name = request.form['name']
+            title = request.form['title']
+            text = request.form['text']
+
+            new_comment = Feedback(name=name, title=title, text=text)
+
+            try:
+                db.session.add(new_comment)
+                db.session.commit()
+                return redirect('/')
+            except:
+                return "Ошибка"
+        else:
+                return render_template("create_comments.html")
+            
 
 @app.route('/create_feedback', methods=["POST", "GET"])
 def create_feedback():

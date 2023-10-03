@@ -17,7 +17,6 @@ class Article(db.Model):
     title = db.Column(db.String(60), nullable=False)
     intro = db.Column(db.String(100), nullable=False)
     text = db.Column(db.Text(), nullable=False)
-    image_data = db.Column(db.LargeBinary, nullable=False)
     date = db.Column(db.DateTime(), default=datetime.utcnow)
 
     def __repr__(self):
@@ -91,7 +90,6 @@ def register():
 def login():
     if request.method == 'POST':
         name = request.form['name']
-        surname = request.form['surname']
         email = request.form['email']
         password = request.form['password']
 
@@ -104,14 +102,12 @@ def login():
     
     return render_template('login.html')
 
-@app.route('/profile')
-def profile():
-    info = []
-    try:
-        info = User.query.all()
-    except:
-        print("Ошибка")
-    return render_template('profile.html', list=info)
+@app.route('/profile/<name>')
+def profile(name):
+    user = User.query.filter_by(name=name).first()
+    if user is None:
+        about(404)
+    return render_template('profile.html', user=user)
 
 @app.route('/logout')
 def logout():
@@ -300,9 +296,8 @@ def Create_product():
         title = request.form['title']
         intro = request.form['intro']
         text = request.form['text']
-        image = request.files['image']
 
-        article = Article(title=title, intro=intro, text=text, name=image.intro, image_data=image.read())
+        article = Article(title=title, intro=intro, text=text)
 
         try:
             db.session.add(article)

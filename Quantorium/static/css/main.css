@@ -1,5 +1,3 @@
-
-
 *{
   margin: 0;
   padding: 0;
@@ -23,36 +21,9 @@ body{
     background-size: cover;
 }
 
-.cardFF{
-  margin-left: 5px;
-  margin-top: 150px;
-  padding: 2rem 1rem;
-  border-radius: 10px;
-  background-color: rgb(255, 255, 255, .5);
-  min-height: 200px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, .25);
+.infos{
+  margin-left: 1.5;
 }
-
-  .infos{
-    margin-left: 1.5;
-  }
-  
-  .stats{
-    margin-bottom: 1rem;
-  }
-  
-  .stats li{
-    min-width: 5rem;
-  }
-  
-  .stats li h3{
-    font-size: .99rem;
-  }
-  
-  .stats li h3{
-    font-size: .75rem;
-  }
-  
   .cards {
     width: 100%;
     display: flex;
@@ -160,7 +131,7 @@ body{
   background-color: white;
 }
 
-/* это часть карточки об нас */
+/* это часть карточки о нас */
 .Abautcard{
   display: flex;
   padding: 2.5rem 2rem;

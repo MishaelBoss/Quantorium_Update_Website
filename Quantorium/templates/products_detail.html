@@ -33,7 +33,8 @@
 
 <div class="News-card">
   <div class="News-card-logo">
-    <img src="/static/icons/English.jpg" alt="logo">
+    <li><img src="{{ url_for('static', filename=image.filename) }}"></li>
+    <li><a href="/image/{{ image.id }}">{{ image.name }}</a></li>
   </div>
   <div class="News-card-header">
       <h1 style="font-family: 'Comfortaa', cursive;">{{ article.title }}</h1>

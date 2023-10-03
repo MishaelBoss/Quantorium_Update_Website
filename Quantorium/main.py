@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, make_response, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
@@ -15,6 +17,7 @@ class Article(db.Model):
     title = db.Column(db.String(60), nullable=False)
     intro = db.Column(db.String(100), nullable=False)
     text = db.Column(db.Text(), nullable=False)
+    image_data = db.Column(db.LargeBinary, nullable=False)
     date = db.Column(db.DateTime(), default=datetime.utcnow)
 
     def __repr__(self):
@@ -297,8 +300,9 @@ def Create_product():
         title = request.form['title']
         intro = request.form['intro']
         text = request.form['text']
+        image = request.files['image']
 
-        article = Article(title=title, intro=intro, text=text)
+        article = Article(title=title, intro=intro, text=text, name=image.intro, image_data=image.read())
 
         try:
             db.session.add(article)

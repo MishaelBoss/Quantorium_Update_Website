@@ -2,10 +2,12 @@ from flask import Flask, render_template, request, redirect, make_response, url_
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.utils import secure_filename
-import os
+import os, hashlib
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
+app.config['SESSION_TYPE'] = 'memcached'
+app.config['SECRET_KEY'] = '42136gh3242342ggh'
 HOST = '0.0.0.0'
 PORT = 5000
 DEBUG = True
@@ -49,6 +51,7 @@ class Comment(db.Model):
 class User(db.Model):
     __tablename__ = 'User'
     id = db.Column(db.Integer, primary_key=True)
+    login = db.Column(db.String(60), unique=True, nullable=False)
     name = db.Column(db.String(60), unique=True, nullable=False)
     surname = db.Column(db.String(60), unique=True, nullable=False)
     email = db.Column(db.String(150), nullable=False, unique=True)
@@ -62,11 +65,16 @@ class User(db.Model):
 @app.route('/')
 @app.route('/home')
 def index():
+    name = request.cookies.get('user')
+    if name is None:
+        return redirect('/login')
+    user = User.query.filter_by(login=name).first()
     return render_template("Index.html")
 
 @app.route("/register", methods=("POST", "GET"))
 def register():
     if request.method == "POST":
+        login= request.form['login']
         name = request.form['name']
         surname = request.form['surname']
         email = request.form['email']
@@ -77,7 +85,7 @@ def register():
             return 'Имя пользователя уже существует'
 
         try:
-            new_user = User(name=name, surname=surname, email=email, password=password)
+            new_user = User(name=name, surname=surname, email=email, password=password, login=login)
             db.session.add(new_user)
             db.session.commit()
             return redirect('/login')
@@ -88,31 +96,58 @@ def register():
 
 @app.route('/login', methods=['POST', "GET"])
 def login():
+    name = request.cookies.get('user')
     if request.method == 'POST':
-        name = request.form['name']
-        email = request.form['email']
+        login= request.form['login']
         password = request.form['password']
 
-        user = User.query.filter_by(name=name).first()
-        if user and user.password == password and user.email == email:
-            session['user_id'] = user.id
-            return redirect('/')
+        user = User.query.filter_by(login=login).first()
+        if user and user.password == password and user.login == login:
+            resp = make_response(redirect("/"))
+            resp.set_cookie('user', user.login)
+            return resp
         else:
             return 'Неверный пароль или имя!'
     
     return render_template('login.html')
 
-@app.route('/profile/<name>')
-def profile(name):
-    user = User.query.filter_by(name=name).first()
-    if user is None:
-        about(404)
+@app.route('/profile')
+def profile():
+    name = request.cookies.get('user')
+    if name is None:
+        return redirect('/login')
+    user = User.query.order_by(User.date.desc()).all()
+    user = User.query.filter_by(login=name).first()
     return render_template('profile.html', user=user)
+
+@app.route('/profile_edit', methods=['GET', 'POST'])
+def profile_edit():
+    name = request.cookies.get('user')
+    if name is None:
+        return redirect('/login')
+    user = User.query.filter_by(login=name).first()
+    if request.method == 'POST':
+        login = request.form['login']
+        email = request.form['email']
+        name = request.form['name']
+        surname = request.form['surname']
+        password = request.form['password']
+        if password!= '':
+            user.password = hashlib.md5(password.encode("utf-8")).hexdigest()
+        user.login = login
+        user.email = email
+        user.name = name
+        user.surname = surname
+        db.session.commit()
+        return redirect('/profile')
+    else:
+        return render_template('profile_edit.html', user=user)
 
 @app.route('/logout')
 def logout():
-    session.pop('user_id', None)
-    return redirect('/')
+    resp = make_response(redirect("/login"))
+    resp.set_cookie('user', '', expires=0)
+    return resp
 
 @app.route('/Buy')
 def Buy():

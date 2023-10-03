@@ -36,9 +36,6 @@
   <div class="first hero">
     <img class="hero-profile-img" src="/static/images/BG/BgVR.jpg">
     <div class="hero-description-bk"></div>
-    <div class="hero-logo">
-      <img src="/static/icons/VRAR-квантум.png">
-    </div>
     <div class="hero-description">
       <h2 style="font-family: 'Comfortaa', cursive;"> {{ el.title }} </h2>
       <p style="font-family: 'Comfortaa', cursive;"> {{ el.intro }} </p>
@@ -52,37 +49,9 @@
   </div>
 {% endfor %}
 {% else %}
-<p>У нас еще нет статей на сайте если хотите их добавить напешите в адресной строке http://127.0.0.1:5000/Admin</p>
+<p>У нас еще нет статей на сайте.</p>
 {% endif %}
 </div>
-
-  <div class="Abautcard">
-    <div class="AbautInfos" style="margin-left: auto; margin-right: auto;">
-        <ul>
-            <li>
-              {% if articles|length > 0 %}
-                  {% for el in articles%}
-                      <h2 style="font-family: 'Comfortaa', cursive;"> {{ el.title }} </h2>
-                      <p style="font-family: 'Comfortaa', cursive;"> {{ el.intro }} </p>
-                      <p style="font-family: 'Comfortaa', cursive;"><b>Дата: {{ el.date.date() }} </b></p>
-                      <a class="view, button-28" href="/products/{{ el.id }}" style="
-                      border-radius: 4rem; 
-                      width: 150px; 
-                      height: 20px; 
-                      min-height: 50px;
-                      display: grid;
-                      align-content: center;">Подробно</a>
-                  {% endfor %}
-
-                {% else %}
-                <p>У нас еще нет статей на сайте если хотите их добавить напешите в адресной строке http://127.0.0.1:5000/Admin</p>
-                {% endif %}
-
-            </li>
-        </ul>
-    </div>
- </div>
-
 
 <footer class="footer-distributed" style="bottom: -200px;">
   <div class="footer-left">

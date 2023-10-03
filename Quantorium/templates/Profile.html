@@ -16,12 +16,13 @@
 <div class="header">
     <a class="logo">Кванториум-Новоуральск<img src="/static/icons/Logo.png" style="height: 20px; width: 20px;"></a>
     <div class="header-right">
-        <a href="/">Главная</a>
-        <a href="/products">Новости</a>
-        <a href="game">Игра об Кванториуме</a>
-        <a href="@">Направления и программы</a>
-        <a href="@">Мероприятия</a>
-        <a href="@">Курсы</a>
+      <a href="/">Главная</a>
+      <a href="/products">Новости</a>
+      <a href="game">Игра об Кванториуме</a>
+      <a href="/direction_and_programs">Направления и программы</a>
+      <a href="/event">Мероприятия</a>
+      <a href="/courses">Курсы</a>
+      <a href="/login">Войти на сайт</a>
         <a href="/login">Войти на сайт</a>
         <div class="ProfilePanel">
             <a class="active" href=""><img src="/static/Profile-Card/Stepa.jpg">Профиль</a>
@@ -29,38 +30,35 @@
     </div>
 </div>
 
-<div class="News-card" style="bottom: -150px;">
+<div class="News-card">
   <div class="News-card-logo">
     <img src="{{ url_for('static', filename='Profile-Card/Stepa.jpg') }}" style="border-radius: 50%;" alt="logo">
   </div>
   <div class="News-card-header">
-    <div class="NameProfel">
-      <h2>{{ user.name }}</h2>
-      <h2>Фамилия:</h2>
-      <h3>Яковлев</h3>
-    </div>
-    <div class="NameProfel">
-        <h2>Имя:</h2>
-        <h3>Михаил</h3>
-    </div>
-    <div class="NameProfel" style="font-size: 12px;">
-      <h2>Дата создание аккаунта:</h2>
-      <h3>20.02.2023</h3>
-    </div>
+    <h1 style="font-family: 'Comfortaa', cursive;">Login: {{user.login}}</h1>
+    <hr class="hr-washed">
+      <h1 style="font-family: 'Comfortaa', cursive;">Имя: {{user.name}}</h1>
+      <h2 style="font-family: 'Comfortaa', cursive;">Фамилия: {{user.surname}}</h2>
+      <hr class="hr-washed">
+      <p style="font-family: 'Comfortaa', cursive;"><b>email: {{user.email}}</p>
+      <hr class="hr-washed">
+      <p style="font-family: 'Comfortaa', cursive;"><b>Дата создание аккаунта:  {{user.date.date() }}</b></p>
   </div>
   <div class="Btn_detail">
-    <a class="view, button-28" href="/account_change" style="
+    <a class="view, button-28" href="/profile_edit" style="
+    position: relative;
     border-radius: 4rem; 
     width: 150px; 
     height: 20px; 
     min-height: 50px;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
     display: grid;
     align-content: center;">Изменить аккаунт</a>
   </div>
 </div>
 
-<footer class="footer-distributed">
+<footer class="footer-distributed" style="bottom: -120px;">
   <div class="footer-left">
     <p class="footer-links">
     <a class="link-1" href="/">Главная</a>

@@ -35,8 +35,8 @@
 </header>
 
 <div style="position: relative; text-align: center;">
-{% if articles|length > 0 %}
-  {% for el in articles%}
+{% if event|length > 0 %}
+  {% for el in event%}
   <div class="first hero">
     <img class="hero-profile-img" src="/static/images/BG/BgVR.jpg">
     <div class="hero-description-bk"></div>
@@ -48,9 +48,9 @@
       <p style="font-family: 'Comfortaa', cursive;"> {{ el.intro }} </p>
     </div>
     <div  class="hero-date">
-      <p style="font-family: 'Comfortaa', cursive;"><b>Дата: {{ el.date.date() }} </b></p>
+      <p style="font-family: 'Comfortaa', cursive;"><b>Дата: {{ el.date_event.date() }} </b></p>
       <div class="eight">
-        <a href="/products/{{ el.id }}">Подробно</a>
+        <a href="/event_detail/{{ el.id }}">Подробно</a>
       </div>
     </div>
   </div>
@@ -59,34 +59,6 @@
 <p>Пока что нет Мероприятий</p>
 {% endif %}
 </div>
-
-  <div class="Abautcard">
-    <div class="AbautInfos" style="margin-left: auto; margin-right: auto;">
-        <ul>
-            <li>
-              {% if articles|length > 0 %}
-                  {% for el in articles%}
-                      <h2 style="font-family: 'Comfortaa', cursive;"> {{ el.title }} </h2>
-                      <p style="font-family: 'Comfortaa', cursive;"> {{ el.intro }} </p>
-                      <p style="font-family: 'Comfortaa', cursive;"><b>Дата: {{ el.date.date() }} </b></p>
-                      <a class="view, button-28" href="/products/{{ el.id }}" style="
-                      border-radius: 4rem; 
-                      width: 150px; 
-                      height: 20px; 
-                      min-height: 50px;
-                      display: grid;
-                      align-content: center;">Подробно</a>
-                  {% endfor %}
-
-                {% else %}
-                <p>Пока что нет Мероприятий</p>
-                {% endif %}
-
-            </li>
-        </ul>
-    </div>
- </div>
-
 
 <footer class="footer-distributed" style="bottom: -200px;">
   <div class="footer-left">

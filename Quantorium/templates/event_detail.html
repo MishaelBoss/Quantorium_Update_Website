@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/profile Card.css')}}">
         <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
         <link rel="shortcut icon" sizes="32x32" href="{{ url_for('static', filename='icons/Logo.png')}}">
-        <title>{{ article.title }}</title>
+        <title>{{ event.title }}</title>
     </head>
 </html>
 <body>
@@ -35,12 +35,12 @@
   <div class="News-card-logo">
   </div>
   <div class="News-card-header">
-      <h1 style="font-family: 'Comfortaa', cursive;">{{ article.title }}</h1>
-      <p style="font-family: 'Comfortaa', cursive;"><b>Полное описание: {{ article.text }} </b></p>
-      <p style="font-family: 'Comfortaa', cursive;"><b>Дата: {{ article.date.date() }} </b></p>
+      <h1 style="font-family: 'Comfortaa', cursive;">{{ event.title }}</h1>
+      <p style="font-family: 'Comfortaa', cursive;"><b>Полное описание: {{ event.text }} </b></p>
+      <p style="font-family: 'Comfortaa', cursive;"><b>Дата: {{ event.date_event.date() }} </b></p>
   </div>
   <div class="Btn_detail" style="justify-content: center;">
-    <a class="view, button-28" href="/products/{{ article.id }}/update" style="
+    <a class="view, button-28" href="/event/{{ event.id }}/update" style="
     border-radius: 4rem; 
     width: 150px; 
     height: 20px; 
@@ -48,7 +48,7 @@
     display: grid;
     align-content: center;">Изменить</a>
 
-    <a class="view, button-28" href="/event/{{ article.id }}/del" style="
+    <a class="view, button-28" href="/event/{{ event.id }}/del" style="
     position: relative;
     left: 20px;
     border-radius: 4rem; 

@@ -24,6 +24,17 @@ class Article(db.Model):
     def __repr__(self):
         return '<Article %r>' % self.id
     
+class Event(db.Model):
+    __tablename__ = 'event'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(60), nullable=False)
+    intro = db.Column(db.String(100), nullable=False)
+    text = db.Column(db.Text(), nullable=False)
+    date_event = db.Column(db.DateTime(), default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<Event %r>' % self.id
+    
 class Feedback(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), unique=True, nullable=False)
@@ -212,10 +223,46 @@ def about():
 def Stepa():
     return render_template("Stepa_about.html")
 
+
+@app.route('/event_detail/<int:id>')
+def event_detail(id):
+    event = Event.query.get(id)
+    return render_template("event_detail.html", event=event)
+
+@app.route('/event/<int:id>/del')
+def event_del(id):
+    event = Event.query.get_or_404(id)
+    try:
+        db.session.delete(event)
+        db.session.commit()
+        return redirect('/')
+    except:
+        return "При удаление ароизошла ошибка"
+
 @app.route('/event')
 def event():
-    return render_template("event.html")
+    event = Event.query.order_by(Event.date_event.desc()).all()
+    return render_template("event.html", event=event)
 
+@app.route('/create_event', methods=["POST", "GET"])
+def create_event():
+    if request.method == "POST":
+        title = request.form['title']
+        intro = request.form['intro']
+        text = request.form['text']
+
+
+        event = Event(title=title, text=text, intro=intro)
+
+        try:
+            db.session.add(event)
+            db.session.commit()
+            return redirect('/')
+        except:
+            return "Ошибка создание поста"
+    else:
+            return render_template("сreate-event.html")
+    
 @app.route('/create_comment', methods=["POST", "GET"])
 def Comments():
         name = request.cookies.get('user')

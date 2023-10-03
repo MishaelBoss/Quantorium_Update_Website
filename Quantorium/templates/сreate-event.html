@@ -1,13 +1,13 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
     <head>
       <link rel="stylesheet" href="{{ url_for('static', filename='css/foter.css')}}">
       <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
-      <link rel="stylesheet" href="{{ url_for('static', filename='css/main-product.css')}}">
       <link rel="stylesheet" href="{{ url_for('static', filename='css/panel.css')}}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/main-product.css')}}">
       <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
       <link rel="shortcut icon" sizes="32x32" href="{{ url_for('static', filename='icons/Logo.png')}}">
-      <title>Новости</title>
+      <title>Создать мероприятия</title>
     </head>
 </html>
 <body>
@@ -15,45 +15,35 @@
     <a class="logo">Кванториум-Новоуральск<img src="/static/icons/Logo.png" style="height: 20px; width: 20px;"></a>
     <div class="header-right">
       <a href="/">Главная</a>
-      <a class="active" href="/products">Новости</a>
+      <a href="/products">Новости</a>
+      <a class="active" href="/Create-product">Создать новый пост</a>
       <a href="game">Игра об Кванториуме</a>
       <a href="@">Направления и программы</a>
       <a href="@">Мероприятия</a>
       <a href="/courses">Курсы</a>
-      <a href="/login">Войти на сайт</a>
       <div class="ProfilePanel">
         <a href="profile"><img src="/static/Profile-Card/Stepa.jpg">Профиль</a>
-      </div>
+    </div>
     </div>
   </div>
 
-<br><br><br><br>
-<h1 style="text-align: center; color: blueviolet; font-family: Impact, Haettenschweiler">Новости от админа</h1>
+    <br>
+    <h1 style="text-align: center; color: darkmagenta; font-family: Impact, Haettenschweiler">Выложить мероприятия</h1>
 
-<div style="position: relative; text-align: center;">
-{% if articles|length > 0 %}
-  {% for el in articles%}
-  <div class="first hero">
-    <img class="hero-profile-img" src="/static/images/BG/BgVR.jpg">
-    <div class="hero-description-bk"></div>
-    <div class="hero-description">
-      <h2 style="font-family: 'Comfortaa', cursive;"> {{ el.title }} </h2>
-      <p style="font-family: 'Comfortaa', cursive;"> {{ el.intro }} </p>
-    </div>
-    <div  class="hero-date">
-      <p style="font-family: 'Comfortaa', cursive;"><b>Дата: {{ el.date.date() }} </b></p>
-      <div class="eight">
-        <a href="/products/{{ el.id }}">Подробно</a>
-      </div>
-    </div>
-  </div>
-{% endfor %}
-{% else %}
-<p>У нас еще нет статей на сайте.</p>
-{% endif %}
-</div>
 
-<footer class="footer-distributed" style="bottom: -500px;">
+    <div class="card" style="max-width: 1300px; max-height: 1300px; margin-left: auto; margin-right: auto; border-radius: 4rem;">
+        <div class="infos" style="text-align: center;">
+                <form method="post">
+                  <input type="text" name="title" id="title" value="Имя поста" style="font-family: 'Comfortaa', cursive; height: 30px; width: 250px;"><br>
+                  <textarea name="intro" id="intro" cols="30" rows="10" style="font-family: 'Comfortaa', cursive;">Краткое описание мероприятия</textarea><br>
+                  <textarea name="text" id="text" cols="30" rows="10" style="font-family: 'Comfortaa', cursive;">Полное описание мероприятия</textarea><br>
+                  <input type="file" name="image">
+                  <input class="view, button-28" type="submit" value="отправить" style="border-radius: 4rem; width: 500px;">
+                </form>
+        </div>
+     </div>
+
+<footer class="footer-distributed">
   <div class="footer-left">
     <p class="footer-links">
     <a class="link-1" href="/">Главная</a>

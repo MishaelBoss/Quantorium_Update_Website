@@ -65,10 +65,6 @@ class User(db.Model):
 @app.route('/')
 @app.route('/home')
 def index():
-    name = request.cookies.get('user')
-    if name is None:
-        return redirect('/login')
-    user = User.query.filter_by(login=name).first()
     return render_template("Index.html")
 
 @app.route("/register", methods=("POST", "GET"))
@@ -116,7 +112,6 @@ def profile():
     name = request.cookies.get('user')
     if name is None:
         return redirect('/login')
-    user = User.query.order_by(User.date.desc()).all()
     user = User.query.filter_by(login=name).first()
     return render_template('profile.html', user=user)
 
@@ -151,6 +146,9 @@ def logout():
 
 @app.route('/Buy')
 def Buy():
+    name = request.cookies.get('user')
+    if name is None:
+        return redirect('/login')
     return render_template("Buy.html")
 
 @app.route('/Admin')
@@ -198,17 +196,9 @@ def Technical_English():
 def Sponsor():
     return render_template("Sponsor.html")
 
-@app.route('/profile')
-def Profile():
-    return render_template("Profile.html")
-
 @app.route('/account_change')
 def account_change():
     return render_template("account_change.html")
-
-@app.route('/login')
-def Login():
-    return render_template("login.html")
 
 @app.route('/courses')
 def Courses():
@@ -228,6 +218,9 @@ def event():
 
 @app.route('/create_comment', methods=["POST", "GET"])
 def Comments():
+        name = request.cookies.get('user')
+        if name is None:
+            return redirect('/login')
         if request.method == "POST":
             name = request.form['name']
             title = request.form['title']
@@ -247,6 +240,10 @@ def Comments():
 
 @app.route('/create_feedback', methods=["POST", "GET"])
 def create_feedback():
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
+    if name is None:
+        return redirect('/login')
     if request.method == "POST":
         name = request.form['name']
         surname = request.form['surname']
@@ -254,6 +251,7 @@ def create_feedback():
         number = request.form['number']
         title = request.form['title']
         text = request.form['text']
+
 
         bell = Feedback(name=name, surname=surname, email=email, number=number, title=title, text=text)
 
@@ -264,7 +262,7 @@ def create_feedback():
         except:
             return "Ошибка"
     else:
-            return render_template("create_feedback.html")
+            return render_template("create_feedback.html", user=user)
 
 @app.route('/bell')
 def Bell():

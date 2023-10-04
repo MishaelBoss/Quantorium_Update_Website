@@ -34,7 +34,7 @@
 {% if articles|length > 0 %}
   {% for el in articles%}
   <div class="first hero">
-    <img class="hero-profile-img" src="/static/images/BG/BgVR.jpg">
+    <img class="hero-profile-img" src="{{ articles[i].image_news }}">
     <div class="hero-description-bk"></div>
     <div class="hero-description">
       <h2 style="font-family: 'Comfortaa', cursive;"> {{ el.title }} </h2>

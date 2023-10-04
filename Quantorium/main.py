@@ -19,6 +19,7 @@ class Article(db.Model):
     title = db.Column(db.String(60), nullable=False)
     intro = db.Column(db.String(100), nullable=False)
     text = db.Column(db.Text(), nullable=False)
+    image_news = db.Column(db.LargeBinary, nullable=False)
     date = db.Column(db.DateTime(), default=datetime.utcnow)
 
     def __repr__(self):
@@ -376,10 +377,16 @@ def Create_product():
         title = request.form['title']
         intro = request.form['intro']
         text = request.form['text']
-
-        article = Article(title=title, intro=intro, text=text)
+        image = request.files['file[]']
 
         try:
+            image_news = f'static/images/{title}'
+            os.makedirs(image_news)
+            image_news += '/image.png'
+            image.save(image_news)
+
+            article = Article(title=title, intro=intro, text=text, image_news=image_news)
+            
             db.session.add(article)
             db.session.commit()
             return redirect('/products')

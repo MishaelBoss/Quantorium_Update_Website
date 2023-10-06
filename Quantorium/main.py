@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, make_response, url_
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.utils import secure_filename
-import os, hashlib
+import os, hashlib, shutil
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
@@ -19,7 +19,7 @@ class Article(db.Model):
     title = db.Column(db.String(60), nullable=False)
     intro = db.Column(db.String(100), nullable=False)
     text = db.Column(db.Text(), nullable=False)
-    image_news = db.Column(db.LargeBinary, nullable=False)
+    path = db.Column(db.Integer, nullable=False)
     date = db.Column(db.DateTime(), default=datetime.utcnow)
 
     def __repr__(self):
@@ -123,7 +123,10 @@ def login():
 def profile():
     name = request.cookies.get('user')
     if name is None:
+        date = name.date
         return redirect('/login')
+    else:
+        date = None
     user = User.query.filter_by(login=name).first()
     return render_template('profile.html', user=user)
 
@@ -377,21 +380,21 @@ def Create_product():
         title = request.form['title']
         intro = request.form['intro']
         text = request.form['text']
-        image = request.files['file[]']
-
+        image = request.files['file']
         try:
-            image_news = f'static/images/{title}'
-            os.makedirs(image_news)
-            image_news += '/image.png'
-            image.save(image_news)
+            path = f'static/imges_news/{title}'
+            os.makedirs(path)
+            path += '/image.png'
+            image.save(path)
 
-            article = Article(title=title, intro=intro, text=text, image_news=image_news)
+            article = Article(title=title, intro=intro, text=text, path=path)
             
             db.session.add(article)
             db.session.commit()
             return redirect('/products')
-        except:
-            return "Опа"
+        except Exception as ex:
+            print(ex)
+            return redirect('/products')
     else:
             return render_template("Create-product.html")
     

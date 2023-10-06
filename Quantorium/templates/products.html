@@ -16,9 +16,9 @@
     <div class="header-right">
       <a href="/">Главная</a>
       <a class="active" href="/products">Новости</a>
-      <a href="game">Игра об Кванториуме</a>
-      <a href="@">Направления и программы</a>
-      <a href="@">Мероприятия</a>
+      <a href="game">Игра о Кванториуме</a>
+      <a href="/direction_and_programs">Направления и программы</a>
+      <a href="/event">Мероприятия</a>
       <a href="/courses">Курсы</a>
       <a href="/login">Войти на сайт</a>
       <div class="ProfilePanel">
@@ -34,7 +34,7 @@
 {% if articles|length > 0 %}
   {% for el in articles%}
   <div class="first hero">
-    <img class="hero-profile-img" src="{{ articles[i].image_news }}">
+    <img class="hero-profile-img" src="{{ articles[i].path }}">
     <div class="hero-description-bk"></div>
     <div class="hero-description">
       <h2 style="font-family: 'Comfortaa', cursive;"> {{ el.title }} </h2>

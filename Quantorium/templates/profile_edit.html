@@ -6,6 +6,7 @@
       <link rel="stylesheet" href="{{ url_for('static', filename='css/panel.css')}}">
       <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
       <link rel="stylesheet" href="{{ url_for('static', filename='css/main-product.css')}}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/registr.css')}}">
       <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
       <link rel="shortcut icon" sizes="32x32" href="{{ url_for('static', filename='icons/Logo.png')}}">
       <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +19,7 @@
     <div class="header-right">
       <a href="/">Главная</a>
       <a href="/products">Новости</a>
-      <a href="game">Игра об Кванториуме</a>
+      <a href="game">Игра о Кванториуме</a>
       <a href="/direction_and_programs">Направления и программы</a>
       <a href="/event">Мероприятия</a>
       <a href="/courses">Курсы</a>
@@ -30,34 +31,34 @@
     </div>
 </div>
 
-<div class="News-card">
+<form style="position: absolute; height: 950px; margin-top: 120px;" action="" method="post" method="POST" action="/register">
   <h1>Изменить профиль</h1>
+
   <div class="News-card-logo">
     <img src="{{ url_for('static', filename='Profile-Card/Stepa.jpg') }}" style="border-radius: 50%;" alt="logo">
   </div>
-  <div class="News-card-header">
-      <form method="post">
-        <label style="font-family: 'Comfortaa', cursive;" for="login">Логин</label>
-        <img src="/static/icons/user.png" class="icon-login"><input type="text" placeholder="{{user.login}}" class="input" name="login" id="login" title="Логин" value="{{ user.login }}">
-        
-        <hr class="hr-washed">
-    
-        <label for="name" style="font-family: 'Comfortaa', cursive;">Имя</label>
-        <img src="/static/icons/user.png" class="icon-login"><input type="text" placeholder="{{user.name}}" class="input" name="name" id="name" title="Имя" value="{{ user.name }}">
-    
-        <label style="font-family: 'Comfortaa', cursive;" for="username">Фамилия</label>
-        <img src="/static/icons/user.png" class="icon-login"><input type="text" placeholder="{{user.surname}}" class="input" name="surname" id="surname" title="Фамилия" value="{{ user.surname }}">
-    
-        <hr class="hr-washed">
-    
-        <label style="font-family: 'Comfortaa', cursive;" for="email">email</label>
-        <img src="/static/icons/mail.png" class="icon-login"><input type="email" placeholder="Ваш Email" class="input" name="email" id="email" title="Мыло" value="{{ user.email }}">
 
-        <label style="font-family: 'Comfortaa', cursive;" for="password">Пароль</label>
-        <img src="/static/icons/padlock.png" class="icon-login"><input type="password" placeholder="Ваш Пароль" class="input" id="password" name="password" title="Пароль">
-        <label class="lbl"><input type="checkbox" class="check">Показать пароль</label><br><br>
-        <button type="submit" class="view, button-28" title="Войти">Сохранить изменение аккаунта</button><br><br>
-    </form>
-  </div>
-</div>
+  <form method="post">
+    <label style="font-family: 'Comfortaa', cursive;" for="login">Логин<img src="/static/icons/user.png" class="icon-login"></label>
+    <input type="text" placeholder="{{user.login}}" name="login" id="login" title="Логин" value="{{ user.login }}">
+    
+    <hr class="hr-washed">
+
+    <label for="name" style="font-family: 'Comfortaa', cursive;">Имя<img src="/static/icons/user.png" class="icon-login"></label>
+    <input type="text" placeholder="{{user.name}}" name="name" id="name" title="Имя" value="{{ user.name }}">
+
+    <label style="font-family: 'Comfortaa', cursive;" for="username">Фамилия<img src="/static/icons/user.png" class="icon-login"></label>
+    <input type="text" placeholder="{{user.surname}}" name="surname" id="surname" title="Фамилия" value="{{ user.surname }}">
+
+    <hr class="hr-washed">
+
+    <label style="font-family: 'Comfortaa', cursive;" for="email">email<img src="/static/icons/mail.png" class="icon-login"></label>
+    <input type="email" placeholder="Ваш Email" name="email" id="email" title="Мыло" value="{{ user.email }}">
+
+    <label style="font-family: 'Comfortaa', cursive;" for="password">Пароль<img src="/static/icons/padlock.png" class="icon-login"></label>
+    <input type="password" placeholder="Ваш Пароль" id="password" name="password" title="Пароль">
+    <label><input type="checkbox" style="height: 20px;">Показать пароль</label><br><br>
+
+    <button type="submit" class="view, button-28" title="Войти">Сохранить изменение аккаунта</button><br><br>
+</form>
 </body>

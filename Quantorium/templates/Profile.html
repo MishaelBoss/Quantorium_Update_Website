@@ -25,14 +25,14 @@
       <a href="/login">Войти на сайт</a>
         <a href="/login">Войти на сайт</a>
         <div class="ProfilePanel">
-            <a class="active" href=""><img src="/static/Profile-Card/Stepa.jpg">Профиль</a>
+            <a class="active" href=""><img src="{{user.pathUser}}" alt="logo">Профиль</a>
         </div>
     </div>
 </div>
 
 <div class="News-card">
   <div class="News-card-logo">
-    <img src="{{ url_for('static', filename='Profile-Card/Stepa.jpg') }}" style="border-radius: 50%;" alt="logo">
+    <img src="{{user.pathUser}}" style="border-radius: 50%; height: 100px; width: 100px;" alt="logo">
   </div>
   <div class="News-card-header">
     <h1 style="font-family: 'Comfortaa', cursive;">Login: {{user.login}}</h1>
@@ -42,7 +42,8 @@
       <hr class="hr-washed">
       <p style="font-family: 'Comfortaa', cursive;"><b>email: {{user.email}}</p>
       <hr class="hr-washed">
-      <p style="font-family: 'Comfortaa', cursive;"><b>Дата создание аккаунта:  {{ user.date.date() }}</b></p>
+      <p style="font-family: 'Comfortaa', cursive;"><b>Дата создание аккаунта:  {{ user.date }}</b></p>
+      <p style="font-family: 'Comfortaa', cursive;"><b>Последнее посещение:  {{ user.last_seen }}</b></p>
   </div>
   <div class="Btn_detail">
     <a class="view, button-28" href="/profile_edit" style="
@@ -55,6 +56,17 @@
     margin-right: auto;
     display: grid;
     align-content: center;">Изменить аккаунт</a>
+
+    <a class="view, button-28" href="/logout" style="
+    position: relative;
+    border-radius: 4rem; 
+    width: 150px; 
+    height: 20px; 
+    min-height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    align-content: center;">Logout</a>
   </div>
 </div>
 

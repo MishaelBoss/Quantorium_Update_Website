@@ -8,6 +8,9 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
 app.config['SESSION_TYPE'] = 'memcached'
 app.config['SECRET_KEY'] = '42136gh3242342ggh'
+app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024
+app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif']
+app.config['UPLOAD_PATH'] = 'uploads'
 HOST = '0.0.0.0'
 PORT = 5000
 DEBUG = True
@@ -68,7 +71,9 @@ class User(db.Model):
     surname = db.Column(db.String(60), unique=True, nullable=False)
     email = db.Column(db.String(150), nullable=False, unique=True)
     password = db.Column(db.Text(), nullable=False)
+    pathUser = db.Column(db.Integer, nullable=False)
     date = db.Column(db.DateTime(), default=datetime.utcnow)
+    last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
 
     def __repr__(self):
         return '<User %r>' % self.id
@@ -77,7 +82,9 @@ class User(db.Model):
 @app.route('/')
 @app.route('/home')
 def index():
-    return render_template("Index.html")
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
+    return render_template("Index.html", user=user)
 
 @app.route("/register", methods=("POST", "GET"))
 def register():
@@ -87,13 +94,19 @@ def register():
         surname = request.form['surname']
         email = request.form['email']
         password = request.form['password']
+        image = request.files['file']
 
         user = User.query.filter_by(name=name).first()
         if user:
             return 'Имя пользователя уже существует'
 
         try:
-            new_user = User(name=name, surname=surname, email=email, password=password, login=login)
+            pathUser = f'static/imgesUser/{login}'
+            os.makedirs(pathUser)
+            pathUser += '/image.png'
+            image.save(pathUser)
+
+            new_user = User(name=name, surname=surname, email=email, password=password, login=login, pathUser=pathUser)
             db.session.add(new_user)
             db.session.commit()
             return redirect('/login')
@@ -142,8 +155,16 @@ def profile_edit():
         name = request.form['name']
         surname = request.form['surname']
         password = request.form['password']
+        image = request.files['file']
+
         if password!= '':
             user.password = hashlib.md5(password.encode("utf-8")).hexdigest()
+
+        pathUser = f'static/imgesUser/{login}'
+        os.makedirs(pathUser)
+        pathUser += '/image.png'
+        image.save(pathUser)
+
         user.login = login
         user.email = email
         user.name = name

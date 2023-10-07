@@ -29,7 +29,7 @@
 
 <script src="/static/js/password.js"></script>
 
-<form style="position: absolute; height: 750px; margin-top: 50px;" action="" method="post" method="POST" action="/register">
+<form style="position: absolute; height: 860px; margin-top: 50px;" action="" method="post" method="POST" action="/register" enctype="multipart/form-data">
     <h3>Регистрация</h3>
 
     <label for="username">Логин</label>
@@ -46,6 +46,11 @@
 
     <label for="password">Пароль</label>
     <input type="password" id="password" placeholder="Введите пароль" name="password">
+
+    <div class="inputUserImage">
+      <label for="file">Картинка профиля</label>
+      <input class="inputUserImage" type="file" name="file">
+    </div>
 
     <button type="submit">Зарегистрироваться</button>
     <div class="reg">

@@ -23,7 +23,12 @@
         <a href="/courses">Курсы</a>
         <a href="/login">Войти на сайт</a>
         <div class="ProfilePanel">
-          <a href="profile"><img src="/static/Profile-Card/Stepa.jpg">Профиль</a>
+          {% if not user %}
+            <a href="profile"><img src="/static/icons/user-default.png" alt="Изображение по умолчанию"><h1>Профиль</h1></a>
+          {% else %}
+            <a href="profile"><img src="{{user.pathUser}}" alt="logo"><h1>{{user.name}}</h1></a>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
@@ -58,8 +63,7 @@
 {% else %}
 <br><br><br>
 <div class="test" style="display: grid;">
-  
-  <img src="/static/icons/close.png" style="width: 20px; height: 20px;"><p style="text-align: center; margin-top: 20px; font-size:50px;">Пока что нет мероприятий</p>
+  <p style="text-align: center; margin-top: 20px; font-size:50px;">Пока что нет мероприятий</p>
 </div>
 {% endif %}
 </div>

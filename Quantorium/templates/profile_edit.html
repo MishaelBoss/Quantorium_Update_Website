@@ -26,16 +26,20 @@
       <a href="/login">Войти на сайт</a>
         <a href="/login">Войти на сайт</a>
         <div class="ProfilePanel">
-            <a class="active" href=""><img src="/static/Profile-Card/Stepa.jpg">Профиль</a>
+            <a class="active" href=""><img src="{{user.pathUser}}" alt="logo">Профиль</a>
         </div>
     </div>
 </div>
 
-<form style="position: absolute; height: 950px; margin-top: 120px;" action="" method="post" method="POST" action="/register">
+<form style="position: absolute; height: 950px; margin-top: 120px;" action="" method="post" method="POST" action="/register" enctype="multipart/form-data" action="/pathUser">
   <h1>Изменить профиль</h1>
 
   <div class="News-card-logo">
-    <img src="{{ url_for('static', filename='Profile-Card/Stepa.jpg') }}" style="border-radius: 50%;" alt="logo">
+    <div class="inputUserImage">
+      <label for="file">Картинка профиля</label>
+      <input class="inputUserImage" type="file" name="file">
+    </div>
+    <a><img src="{{user.pathUser}}" style="border-radius: 50%; height: 100px; width: 100px;" alt="logo"></a>
   </div>
 
   <form method="post">

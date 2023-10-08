@@ -247,11 +247,6 @@ def Courses():
 def about():
     return render_template("About.html")
 
-@app.route('/stepa')
-def Stepa():
-    return render_template("Stepa_about.html")
-
-
 @app.route('/event_detail/<int:id>')
 def event_detail(id):
     event = Event.query.get(id)

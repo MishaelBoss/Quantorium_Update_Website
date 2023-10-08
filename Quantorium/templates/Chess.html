@@ -12,9 +12,8 @@
     </head>
 </html>
 <body>
-
-<div class="header">
-  <a class="logo">Кванториум-Новоуральск<img src="/static/icons/Logo.png" style="height: 20px; width: 20px;"></a>
+  <div class="header">
+    <a class="logo">Кванториум-Новоуральск<img src="/static/icons/Logo.png" style="height: 20px; width: 20px;"></a>
     <div class="header-right">
       <a class="active" href="/">Главная</a>
       <a href="/products">Новости</a>
@@ -24,10 +23,14 @@
       <a href="/courses">Курсы</a>
       <a href="/login">Войти на сайт</a>
       <div class="ProfilePanel">
-        <a href="profile"><img src="/static/Profile-Card/Stepa.jpg">Профиль</a>
+        {% if not user %}
+          <a href="profile"><img src="/static/icons/user-default.png" alt="Изображение по умолчанию"><h1>Профиль</h1></a>
+        {% else %}
+          <a href="profile"><img src="{{user.pathUser}}" alt="logo"><h1>{{user.name}}</h1></a>
+        {% endif %}
+      </div>
     </div>
   </div>
-</div>
 
 <br>
 <header class="header2"  style="margin-top: -17px;">

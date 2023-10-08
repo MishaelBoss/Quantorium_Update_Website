@@ -23,8 +23,13 @@
       <a href="/event">Мероприятия</a>
       <a class="active" href="/courses">Курсы</a>
       <a href="/login">Войти на сайт</a>
-        <div class="ProfilePanel">
-        <a href="profile"><img src="/static/Profile-Card/Stepa.jpg">Профиль</a>
+      <div class="ProfilePanel">
+        {% if not user %}
+          <a href="profile"><img src="/static/icons/user-default.png" alt="Изображение по умолчанию"><h1>Профиль</h1></a>
+        {% else %}
+          <a href="profile"><img src="{{user.pathUser}}" alt="logo"><h1>{{user.name}}</h1></a>
+        {% endif %}
+      </div>
     </div>
     </div>
 </div>
@@ -179,8 +184,7 @@
 </div>
 
 <br><br>
-<div class="first_page" style="max-width: 500px; margin-left: auto; margin-right: auto;">
-    <div class="wrapper">
+    <div class="wrapper" style="height: 170px;">
         <div class="content-splitter">
         <div class="left">
             <div class="block">
@@ -190,8 +194,7 @@
         </div>
         </div>
     </div>
-    </div>
-</div>  
+</div>
 
 <footer class="footer-distributed">
   <div class="footer-left">

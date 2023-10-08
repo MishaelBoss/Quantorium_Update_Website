@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, make_response, url_
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.utils import secure_filename
-import os, hashlib, shutil
+import os, hashlib
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
@@ -283,7 +283,7 @@ def create_event():
         except:
             return "Ошибка создание поста"
     else:
-            return render_template("сreate-event.html")
+            return render_template("create-event.html")
     
 @app.route('/create_comment', methods=["POST", "GET"])
 def Comments():

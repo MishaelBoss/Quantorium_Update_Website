@@ -16,26 +16,30 @@
     <a class="logo">Кванториум-Новоуральск<img src="/static/icons/Logo.png" style="height: 20px; width: 20px;"></a>
     <div class="header-right">
       <a href="/">Главная</a>
-      <a href="/products">Новости</a>
-      <a class="active" href="game">Игра о Кванториуме</a>
+      <a class="active" href="/products">Новости</a>
+      <a href="game">Игра о Кванториуме</a>
       <a href="/direction_and_programs">Направления и программы</a>
       <a href="/event">Мероприятия</a>
       <a href="/courses">Курсы</a>
       <a href="/login">Войти на сайт</a>
       <div class="ProfilePanel">
-        <a href="profile"><img src="/static/Profile-Card/Stepa.jpg">Профиль</a>
+        {% if not user %}
+          <a href="profile"><img src="/static/icons/user-default.png" alt="Изображение по умолчанию"><h1>Профиль</h1></a>
+        {% else %}
+          <a href="profile"><img src="{{user.pathUser}}" alt="logo"><h1>{{user.name}}</h1></a>
+        {% endif %}
+      </div>
     </div>
     </div>
   </div>
 
-  <br>
-
+<br>
 
 <div class="News-card">
   <div class="News-card-logo">
   </div>
   <div class="News-card-header">
-      <img src="{{ article.path }}">
+      <img src="{{ article.path }}" style="border-radius: 50%; height: 100px; width: 100px;">
       <h1 style="font-family: 'Comfortaa', cursive;">{{ article.title }}</h1>
       <p style="font-family: 'Comfortaa', cursive;"><b>Полное описание: {{ article.text }} </b></p>
       <p style="font-family: 'Comfortaa', cursive;"><b>Дата: {{ article.date.date() }} </b></p>
@@ -77,6 +81,33 @@
             display: grid;
             align-content: center;">Оставить</a>
           </div>
+
+          {% if comment|length > 0 %}
+            {% for el in comment%}
+            <div class="wrapper" style="width: 750px;">
+              <div class="content-splitter">
+                <div style="display: grid; justify-content: start; justify-items: center;">
+                  <img class="hero-profile-img" src="{{ el.path}}" style="border-radius: 50%; height: 100px; width: 100px;">
+                  <h3 style="font-family: 'Comfortaa', cursive;"> {{ el.name }} </h3>
+                  <h3 style="font-family: 'Comfortaa', cursive;"> {{ el.surname }} </h3>
+                </div>
+                <div class="left">
+                  <div class="block">
+                    <div class="content">  
+                      <h2 style="font-family: 'Comfortaa', cursive;"> {{ el.title }} </h2>
+                      <p style="font-family: 'Comfortaa', cursive;"> {{ el.text }} </p>
+                      <p style="font-family: 'Comfortaa', cursive;"><b>Дата: {{ el.date_post.date() }} </b></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          {% endfor %}
+          {% else %}
+          <p>Оставить комментарии</p>
+          {% endif %}
+
         </div>
       </div>
     </div>

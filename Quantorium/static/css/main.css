@@ -90,7 +90,6 @@ body::-webkit-scrollbar-thumb {
   }
 
 .first_page{
-  display: flex;
   position: relative;
   text-align: center;
 	margin: 0 0 0 450px;
@@ -102,7 +101,6 @@ body::-webkit-scrollbar-thumb {
     border-radius: 15px;
     grid-template-columns: 6fr 4fr;
     width: 900px;
-    height: 170px;
     background: hsl(0,0%,95%);
     box-shadow: 1px 1px 25px 3px rgba(0,0,0,.3); 
     margin-left: auto;

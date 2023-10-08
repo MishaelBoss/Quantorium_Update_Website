@@ -56,8 +56,10 @@ class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), unique=True, nullable=False)
+    surname = db.Column(db.String(60), unique=True, nullable=False)
     title = db.Column(db.String(60), nullable=False)
     text = db.Column(db.Text(1100), nullable=False)
+    path = db.Column(db.Integer, nullable=False)
     date_post = db.Column(db.DateTime(), default=datetime.utcnow)
 
     def __repr__(self):
@@ -107,6 +109,7 @@ def register():
             image.save(pathUser)
 
             new_user = User(name=name, surname=surname, email=email, password=password, login=login, pathUser=pathUser)
+
             db.session.add(new_user)
             db.session.commit()
             return redirect('/login')
@@ -276,7 +279,6 @@ def create_event():
         intro = request.form['intro']
         text = request.form['text']
 
-
         event = Event(title=title, text=text, intro=intro)
 
         try:
@@ -293,21 +295,29 @@ def Comments():
         name = request.cookies.get('user')
         if name is None:
             return redirect('/login')
+        user = User.query.filter_by(login=name).first()
         if request.method == "POST":
             name = request.form['name']
+            surname = request.form['surname']
             title = request.form['title']
             text = request.form['text']
-
-            new_comment = Feedback(name=name, title=title, text=text)
+            image = request.files['file']
 
             try:
-                db.session.add(new_comment)
+                path = f'static/images_Comment/{title}'
+                os.makedirs(path)
+                path += '/image.png'
+                image.save(path)
+
+                comment = Comment(name=name, surname=surname, title=title, text=text, path=path)
+
+                db.session.add(comment)
                 db.session.commit()
-                return redirect('/')
+                return redirect('/products')
             except:
                 return "Ошибка"
         else:
-                return render_template("create_comments.html")
+                return render_template("create_comments.html", user=user)
             
 
 @app.route('/create_feedback', methods=["POST", "GET"])
@@ -363,8 +373,11 @@ def products():
 
 @app.route('/products/<int:id>')
 def products_detail(id):
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
     article = Article.query.get(id)
-    return render_template("products_detail.html", article=article)
+    comment = Comment.query.order_by(Comment.date_post.desc()).all()
+    return render_template("products_detail.html", article=article, comment=comment, user=user)
 
 
 @app.route('/products/<int:id>/del')

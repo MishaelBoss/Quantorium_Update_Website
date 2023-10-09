@@ -83,6 +83,7 @@ body::-webkit-scrollbar-thumb {
     background-color: white;
     overflow-y: scroll;
     transition: 0.8s ease;
+    border-radius: 15px;
   }
   
   .card:hover .card-desc {
@@ -96,6 +97,18 @@ body::-webkit-scrollbar-thumb {
 	margin: 0 0 0 450px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.edit_trash{
+  display: flex;
+  justify-content: flex-end;
+  padding: -20px 0px 0px 0px;
+}
+
+.edit_trash img{
+	width: 35px;
+	height: 35px;
+  margin-left: 10px;
 }
 
   .wrapper {
@@ -118,7 +131,6 @@ body::-webkit-scrollbar-thumb {
   .content-splitter {
     display: flex;
     flex-direction: column;
-    gap: 2em;
   }
   .left {
     display: flex;
@@ -402,4 +414,23 @@ body::-webkit-scrollbar-thumb {
 	border: none;
 	border-top: 1px solid #333;
 	box-shadow: 0 10px 10px -10px #8c8b8b inset;
+}
+
+.table {
+	width: 100%;
+	margin-bottom: 20px;
+	border: 1px solid #dddddd;
+	border-collapse: collapse; 
+  border-radius: 50%;
+}
+.table th {
+	font-weight: bold;
+	padding: 5px;
+	background: #efefef;
+	border: 2px solid #000000;
+}
+.table td {
+  background-color: #2197db;
+	border: 2px solid #000000;
+	padding: 5px;
 }

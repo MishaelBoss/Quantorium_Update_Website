@@ -15,16 +15,19 @@
 <div class="header">
   <a class="logo">Кванториум-Новоуральск<img src="/static/icons/Logo.png" style="height: 20px; width: 20px;"></a>
   <div class="header-right">
-    <a href="/Admin">Главная</a>
+    <a href="/">Главная</a>
     <a href="/products">Новости</a>
-    <a href="/Create-product">Создать новость</a>
-    <a href="/game">Игра о Кванториуме</a>
+    <a href="game">Игра о Кванториуме</a>
     <a href="/direction_and_programs">Направления и программы</a>
-    <a href="@">Мероприятия</a>
+    <a href="/event">Мероприятия</a>
     <a href="/courses">Курсы</a>
     <a href="/login">Войти на сайт</a>
     <div class="ProfilePanel">
-      <a href="profile"><img src="/static/Profile-Card/Stepa.jpg">Профиль</a>
+      {% if not user %}
+        <a href="profile"><img src="/static/icons/user-default.png" alt="Изображение по умолчанию"><h1>Профиль</h1></a>
+      {% else %}
+        <a href="profile"><img src="{{user.pathUser}}" alt="logo"><h1>{{user.name}}</h1></a>
+      {% endif %}
     </div>
     <div class="ProfilePanel">
       <a class="active" href="/bell"><img src="/static/icons/bell.png">Сообщение</a>
@@ -36,13 +39,13 @@
 
 <div class="News-card">
   <div class="News-card-header">
-      <h1 style="font-family: 'Comfortaa', cursive;">Имя: {{ bell.name }}</h1>
-      <h2 style="font-family: 'Comfortaa', cursive;">Фамилия: {{ bell.surname }}</h2>
+      <h1 style="font-family: 'Comfortaa', cursive;">Имя: {{ user.name }}</h1>
+      <h2 style="font-family: 'Comfortaa', cursive;">Фамилия: {{ user.surname }}</h2>
       <hr class="hr-washed">
       <p style="font-family: 'Comfortaa', cursive;"><b>Заголовок о проблемы: {{ bell.title }}</p>
       <p style="font-family: 'Comfortaa', cursive;"><b>Полное описание: {{ bell.text }} </b></p>
       <hr class="hr-washed">
-      <p style="font-family: 'Comfortaa', cursive;"><b>email: {{ bell.email }}</p>
+      <p style="font-family: 'Comfortaa', cursive;"><b>email: {{ user.email }}</p>
       <p style="font-family: 'Comfortaa', cursive;"><b>телефон: {{ bell.number }} </b></p>
       <hr class="hr-washed">
       <p style="font-family: 'Comfortaa', cursive;"><b>Дата: {{ bell.date.date() }} </b></p>

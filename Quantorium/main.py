@@ -5,12 +5,15 @@ from werkzeug.utils import secure_filename
 import os, hashlib
 
 app = Flask(__name__)
+app.static_folder = 'static'
+
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
 app.config['SESSION_TYPE'] = 'memcached'
 app.config['SECRET_KEY'] = '42136gh3242342ggh'
 app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024
 app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif']
 app.config['UPLOAD_PATH'] = 'uploads'
+
 HOST = '0.0.0.0'
 PORT = 5000
 DEBUG = True
@@ -41,9 +44,6 @@ class Event(db.Model):
     
 class Feedback(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(60), unique=True, nullable=False)
-    surname = db.Column(db.String(60), nullable=False, unique=False)
-    email = db.Column(db.String(150), nullable=False, unique=True)
     number = db.Column(db.String(60), nullable=False)
     title = db.Column(db.String(60), nullable=False)
     text = db.Column(db.Text(), nullable=False)
@@ -55,8 +55,6 @@ class Feedback(db.Model):
 class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(60), unique=True, nullable=False)
-    surname = db.Column(db.String(60), unique=True, nullable=False)
     title = db.Column(db.String(60), nullable=False)
     text = db.Column(db.Text(1100), nullable=False)
     path = db.Column(db.Integer, nullable=False)
@@ -192,60 +190,101 @@ def Buy():
 
 @app.route('/Admin')
 def admin():
-    return render_template("Admin-Index.html")
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
+    user = User.query.all()
+    return render_template("Admin-Index.html", user=user)
 
 @app.route('/direction_and_programs')
 def Direction_and_programs():
-    return render_template("direction_and_programs.html")
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
+    return render_template("direction_and_programs.html", user=user)
 
 @app.route('/game')
 def Game():
-    return render_template("MyGame.html")
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
+    return render_template("MyGame.html", user=user)
 
 @app.route('/it')
 def IT():
-    return render_template("IT.html")
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
+    return render_template("IT.html", user=user)
 
 @app.route('/vr')
 def VR():
-    return render_template("VR.html")
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
+    return render_template("VR.html", user=user)
 
 @app.route('/High_tech')
 def High_tech():
-    return render_template("High_tech.html")
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
+    return render_template("High_tech.html", user=user)
 
 
 @app.route('/mathematics')
 def Mathematics():
-    return render_template("Mathematics.html")
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
+    return render_template("Mathematics.html", user=user)
+
+@app.route('/ai')
+def AI():
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
+    return render_template("ai.html", user=user)
 
 @app.route('/chess')
 def Chess():
-    return render_template("Chess.html")
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
+    return render_template("Chess.html", user=user)
 
 @app.route('/promrobo')
 def Promrobo():
-    return render_template("Promrobo.html")
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
+    return render_template("Promrobo.html", user=user)
 
 @app.route('/technical_english')
 def Technical_English():
-    return render_template("Technical_English.html")
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
+    return render_template("Technical_English.html", user=user)
 
 @app.route('/sponsor')
 def Sponsor():
-    return render_template("Sponsor.html")
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
+    return render_template("Sponsor.html", user=user)
 
 @app.route('/account_change')
 def account_change():
-    return render_template("account_change.html")
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
+    return render_template("account_change.html", user=user)
 
 @app.route('/courses')
 def Courses():
-    return render_template("Courses.html")
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
+    return render_template("Courses.html", user=user)
 
 @app.route('/About')
 def about():
-    return render_template("About.html")
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
+    return render_template("About.html", user=user)
+
+@app.route('/moregame')
+def MoreGame():
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
+    return render_template("MoreDetailGame.html", user=user)
 
 @app.route('/event_detail/<int:id>')
 def event_detail(id):
@@ -264,8 +303,10 @@ def event_del(id):
 
 @app.route('/event')
 def event():
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
     event = Event.query.order_by(Event.date_event.desc()).all()
-    return render_template("event.html", event=event)
+    return render_template("event.html", event=event, user=user)
 
 @app.route('/create_event', methods=["POST", "GET"])
 def create_event():
@@ -292,8 +333,6 @@ def Comments():
             return redirect('/login')
         user = User.query.filter_by(login=name).first()
         if request.method == "POST":
-            name = request.form['name']
-            surname = request.form['surname']
             title = request.form['title']
             text = request.form['text']
             image = request.files['file']
@@ -304,7 +343,7 @@ def Comments():
                 path += '/image.png'
                 image.save(path)
 
-                comment = Comment(name=name, surname=surname, title=title, text=text, path=path)
+                comment = Comment(title=title, text=text, path=path)
 
                 db.session.add(comment)
                 db.session.commit()
@@ -313,8 +352,36 @@ def Comments():
                 return "Ошибка"
         else:
                 return render_template("create_comments.html", user=user)
-            
+        
+@app.route('/comment_delete/<int:id>/del')
+def comment_delete(id):
+    comment = Comment.query.get_or_404(id)
 
+    try:
+        db.session.delete(comment)
+        db.session.commit()
+        return redirect('/products')
+    except:
+        return "При удаление ароизошла ошибка"
+    
+@app.route('/comment/<int:id>/update', methods=['POST', 'GET'])
+def comment_update(id):
+    comment = Comment.query.get(id)
+    if request.method == "POST":
+        comment.title = request.form['title']
+        comment.text = request.form['text']
+
+        if user != comment.author:
+            return redirect('/404')
+
+        try:
+            db.session.commit()
+            return redirect('/products')
+        except:
+            return "Опа"
+    else:
+            return render_template("products_update.html", comment=comment, user=user)
+            
 @app.route('/create_feedback', methods=["POST", "GET"])
 def create_feedback():
     name = request.cookies.get('user')
@@ -322,15 +389,12 @@ def create_feedback():
     if name is None:
         return redirect('/login')
     if request.method == "POST":
-        name = request.form['name']
-        surname = request.form['surname']
-        email = request.form['email']
         number = request.form['number']
         title = request.form['title']
         text = request.form['text']
 
 
-        bell = Feedback(name=name, surname=surname, email=email, number=number, title=title, text=text)
+        bell = Feedback(number=number, title=title, text=text)
 
         try:
             db.session.add(bell)
@@ -343,13 +407,19 @@ def create_feedback():
 
 @app.route('/bell')
 def Bell():
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
     bell = Feedback.query.order_by(Feedback.date.desc()).all()
-    return render_template("bell.html", bell=bell)
+
+    return render_template("bell.html", bell=bell, user=user)
 
 @app.route('/bell_feedback_detail/<int:id>')
 def bell_feedback_detail(id):
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
+
     bell = Feedback.query.get(id)
-    return render_template("bell_feedback_detail.html", bell=bell)
+    return render_template("bell_feedback_detail.html", bell=bell, user=user)
 
 @app.route('/feedback/<int:id>/del')
 def Feedback_delete(id):
@@ -363,13 +433,17 @@ def Feedback_delete(id):
 
 @app.route('/products')
 def products():
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
+
     articles = Article.query.order_by(Article.date.desc()).all()
-    return render_template("products.html", articles=articles)
+    return render_template("products.html", articles=articles, user=user)
 
 @app.route('/products/<int:id>')
 def products_detail(id):
     name = request.cookies.get('user')
     user = User.query.filter_by(login=name).first()
+
     article = Article.query.get(id)
     comment = Comment.query.order_by(Comment.date_post.desc()).all()
     return render_template("products_detail.html", article=article, comment=comment, user=user)

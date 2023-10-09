@@ -53,7 +53,7 @@
     display: grid;
     align-content: center;">Изменить</a>
 
-    <a class="view, button-28" href="/event/{{ article.id }}/del" style="
+    <a class="view, button-28" href="/products/{{ article.id }}/del" style="
     position: relative;
     left: 20px;
     border-radius: 4rem; 
@@ -99,6 +99,23 @@
                       <p style="font-family: 'Comfortaa', cursive;"><b>Дата: {{ el.date_post.date() }} </b></p>
                     </div>
                   </div>
+                </div>
+                <hr class="hr-washed">
+                <div class="edit_trash">
+                  {% if not user %}
+                  {% else %}
+                    <a href=""></a><img src="/static/icons/edit.png"></a>
+                    <a href="/comment_delete/{{ comment.id }}/del"></a><img src="/static/icons/trash.png"></a>
+                    <a class="view, button-28" href="/comment_delete/{{ comment.id }}/del" style="
+                    position: relative;
+                    left: 20px;
+                    border-radius: 4rem; 
+                    width: 150px; 
+                    height: 20px; 
+                    min-height: 50px;
+                    display: grid;
+                    align-content: center;">Удалить</a>
+                  {% endif %}
                 </div>
               </div>
             </div>

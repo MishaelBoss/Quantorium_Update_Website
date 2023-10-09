@@ -11,25 +11,28 @@
     </head>
 </html>
 <body>
-  <div class="header">
-    <a class="logo">Кванториум-Новоуральск<img src="/static/icons/Logo.png" style="height: 20px; width: 20px;"></a>
-    <div class="header-right">
-        <a href="/">Главная</a>
-        <a href="/products">Новости</a>
-        <a href="/Create-product">Создать новость</a>
-        <a href="/game">Игра о Кванториуме</a>
-        <a href="/direction_and_programs">Направления и программы</a>
-        <a href="@">Мероприятия</a>
-        <a href="/courses">Курсы</a>
-        <a href="/login">Войти на сайт</a>
-        <div class="ProfilePanel">
-          <a href="profile"><img src="/static/Profile-Card/Stepa.jpg">Профиль</a>
-        </div>
-        <div class="ProfilePanel">
-          <a class="active" href="/bell"><img src="/static/icons/bell.png">Сообщение</a>
-        </div>
+<div class="header">
+  <a class="logo">Кванториум-Новоуральск<img src="/static/icons/Logo.png" style="height: 20px; width: 20px;"></a>
+  <div class="header-right">
+    <a href="/">Главная</a>
+    <a href="/products">Новости</a>
+    <a href="game">Игра о Кванториуме</a>
+    <a href="/direction_and_programs">Направления и программы</a>
+    <a href="/event">Мероприятия</a>
+    <a href="/courses">Курсы</a>
+    <a href="/login">Войти на сайт</a>
+    <div class="ProfilePanel">
+    {% if not user %}
+      <a href="profile"><img src="/static/icons/user-default.png" alt="Изображение по умолчанию"><h1>Профиль</h1></a>
+    {% else %}
+      <a href="profile"><img src="{{user.pathUser}}" alt="logo"><h1>{{user.name}}</h1></a>
+    {% endif %}
+    </div>
+    <div class="ProfilePanel">
+      <a class="active" href="/bell"><img src="/static/icons/bell.png">Сообщение</a>
     </div>
   </div>
+</div>
 
 <br><br><br><br>
 <h1 style="text-align: center; color: blueviolet; font-family: Impact, Haettenschweiler">Сообщение</h1>
@@ -41,8 +44,8 @@
               {% if bell|length > 0 %}
                   {% for bell in bell%}
                       <h2 style="font-family: 'Comfortaa', cursive;"> {{ bell.title }} </h2>
-                      <p style="font-family: 'Comfortaa', cursive;">Имя: {{ bell.name }} </p>
-                      <p style="font-family: 'Comfortaa', cursive;">Фамилия: {{ bell.surname }} </p>
+                      <p style="font-family: 'Comfortaa', cursive;">Имя: {{ user.name }} </p>
+                      <p style="font-family: 'Comfortaa', cursive;">Фамилия: {{ user.surname }} </p>
                       <p style="font-family: 'Comfortaa', cursive;"><b>Дата: {{ bell.date.date() }} </b></p>
                       <a class="view, button-28" href="/bell_feedback_detail/{{ bell.id }}" style="
                       border-radius: 4rem; 

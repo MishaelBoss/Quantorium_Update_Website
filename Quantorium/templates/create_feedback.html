@@ -14,16 +14,20 @@
 <div class="header">
     <a class="logo">Кванториум-Новоуральск<img src="/static/icons/Logo.png" style="height: 20px; width: 20px;"></a>
     <div class="header-right">
-          <a href="/">Главная</a>
-          <a href="/products">Новости</a>
-          <a href="game">Игра о Кванториуме</a>
-          <a href="/direction_and_programs">Направления и программы</a>
-          <a href="@">Мероприятия</a>
-          <a href="/courses">Курсы</a>
-          <a href="/login">Войти на сайт</a>
-          <div class="ProfilePanel">
-            <a href="profile"><img src="/static/Profile-Card/Stepa.jpg">Профиль</a>
-        </div>
+      <a lass="active" href="/">Главная</a>
+      <a href="/products">Новости</a>
+      <a href="game">Игра о Кванториуме</a>
+      <a href="/direction_and_programs">Направления и программы</a>
+      <a href="/event">Мероприятия</a>
+      <a href="/courses">Курсы</a>
+      <a href="/login">Войти на сайт</a>
+      <div class="ProfilePanel">
+        {% if not user %}
+          <a href="profile"><img src="/static/icons/user-default.png" alt="Изображение по умолчанию"><h1>Профиль</h1></a>
+        {% else %}
+          <a href="profile"><img src="{{user.pathUser}}" alt="logo"><h1>{{user.name}}</h1></a>
+        {% endif %}
+      </div>
     </div>
 </div>
 
@@ -33,12 +37,9 @@
 <div class="card" style="max-width: 1300px; max-height: 1300px; margin-left: auto; margin-right: auto; border-radius: 4rem;">
     <div class="infos" style="text-align: center;">
         <form method="post">
-            <input type="text" name="name" id="name" value="{{user.name}}" style="font-family: 'Comfortaa', cursive; height: 30px; width: 250px;"><br><br>
-            <input type="text" name="surname" id="surname" value="{{user.surname}}" style="font-family: 'Comfortaa', cursive; height: 30px; width: 250px;"><br><br>
-            <input type="email" name="email" id="email" value="{{user.email}}" style="font-family: 'Comfortaa', cursive; height: 30px; width: 250px;"><br><br>
-            <input type="text" name="number" id="number" value="телефон" style="font-family: 'Comfortaa', cursive; height: 30px; width: 250px;"><br><br>
-            <textarea name="title" id="title" cols="30" rows="10" style="font-family: 'Comfortaa', cursive;">Заголовок о вашей проблемы</textarea><br>
-            <textarea name="text" id="text" cols="30" rows="10" style="font-family: 'Comfortaa', cursive;">Полное описание о вашей проблемы</textarea><br>
+            <input type="tel" name="number" id="number" placeholder="+7-902-555-55-55" minlength="9" maxlength="20" style="font-family: 'Comfortaa', cursive; height: 30px; width: 250px;"><br><br>
+            <textarea name="title" id="title" cols="30" rows="10" minlength="10" maxlength="1100" style="font-family: 'Comfortaa', cursive;">Заголовок о вашей проблемы</textarea><br>
+            <textarea name="text" id="text" cols="30" rows="10" minlength="10" maxlength="1100" style="font-family: 'Comfortaa', cursive;">Полное описание о вашей проблемы</textarea><br>
             <input class="view, button-28" type="submit" value="отправить" style="border-radius: 4rem; width: 500px;">
         </form>
     </div>

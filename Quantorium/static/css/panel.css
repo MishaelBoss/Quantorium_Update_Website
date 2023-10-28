@@ -8,6 +8,7 @@
   z-index: 1000;
   -webkit-box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 0 0 20px 20px;
 }
 
 .header a {

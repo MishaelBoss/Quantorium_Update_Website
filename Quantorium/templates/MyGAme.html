@@ -13,29 +13,8 @@
     </head>
 </html>
 <body>
-
-  <div class="header">
-    <a class="logo">Кванториум-Новоуральск<img src="/static/icons/Logo.png" style="height: 20px; width: 20px;"></a>
-      <div class="header-right">
-        <a href="/">Главная</a>
-        <a href="/products">Новости</a>
-        <a class="active" href="game">Игра о Кванториуме</a>
-        <a href="/direction_and_programs">Направления и программы</a>
-        <a href="/event">Мероприятия</a>
-        <a href="/courses">Курсы</a>
-        <a href="/login">Войти на сайт</a>
-        <div class="ProfilePanel">
-          {% if not user %}
-            <a href="profile"><img src="/static/icons/user-default.png" alt="Изображение по умолчанию"><h1>Профиль</h1></a>
-          {% else %}
-            <a href="profile"><img src="{{user.pathUser}}" alt="logo"><h1>{{user.name}}</h1></a>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <header class="header2"  style="background-image: url(/static/images/BG/BgGame.jpg);"></header>
+{% include 'header.html' %}
+<header class="header2"  style="background-image: url(/static/images/BG/BgGame.jpg);"></header>
 
 <div style="position: relative; text-align: center;">
   <div class="first hero">
@@ -165,30 +144,5 @@
 </div>
 </div>
 
-<footer class="footer-distributed">
-  <div class="footer-left">
-    <p class="footer-links">
-    <a class="link-1" href="/">Главная</a>
-    <a href="/game">Игра об Кванториум</a>
-    <a href="/About">О нас</a>
-    <a href="/sponsor">Спонсоры</a>
-    <a href="/create_feedback">Обратная связь</a>
-    </p>
-  <div class="footer-center">
-  <div>
-    <i class="fa fa-map-marker"></i>
-    <p><span>Обл: Свердловская</span>Город: Новоуральск</p>
-  </div>
-  <div>
-    <i class="fa fa-phone"></i>
-    <p>+7.902.456.76.99</p>
-  </div>
-  <div>
-    <i class="fa fa-envelope"></i>
-    <p><a href="mailto:Qvant323@yandex.ru">Qvant323@yandex.ru</a></p>
-  </div>
-  </div>
-    <p style="margin-left: 820px;">Mikhaelovsk &copy; 2023</p>
-  </div>
-</footer>
+{% include 'footer.html' %}
 </body>

@@ -14,32 +14,15 @@
     </head>
 </html>
 <body>
-<div class="header">
-    <a class="logo">Кванториум-Новоуральск<img src="/static/icons/Logo.png" style="height: 20px; width: 20px;"></a>
-    <div class="header-right">
-      <a href="/">Главная</a>
-      <a href="/products">Новости</a>
-      <a href="game">Игра о Кванториуме</a>
-      <a href="/direction_and_programs">Направления и программы</a>
-      <a href="/event">Мероприятия</a>
-      <a href="/courses">Курсы</a>
-      <a href="/login">Войти на сайт</a>
-        <a href="/login">Войти на сайт</a>
-        <div class="ProfilePanel">
-            <a class="active" href=""><img src="{{user.pathUser}}" alt="logo">Профиль</a>
-        </div>
-    </div>
-</div>
+{% include 'header.html' %}
 
-<form style="position: absolute; height: 1100px; margin-top: 200px;" action="" method="post" method="POST" action="/register" enctype="multipart/form-data" action="/pathUser">
+<form style="position: absolute; height: 800px; margin-top: 200px;" action="" method="post" method="POST" action="/register" enctype="multipart/form-data" action="/pathUser">
   <h1>Изменить профиль</h1>
-
   <div class="News-card-logo">
     <div class="inputUserImage">
-      <label for="file">Картинка профиля</label>
+      <label for="file">Фото профиля</label>
       <input class="inputUserImage" type="file" name="file">
     </div>
-    <a><img src="{{user.pathUser}}" style="border-radius: 50%; height: 100px; width: 100px;" alt="logo"></a>
   </div>
 
   <form method="post">
@@ -58,10 +41,6 @@
 
     <label style="font-family: 'Comfortaa', cursive;" for="email">email<img src="/static/icons/mail.png" class="icon-login"></label>
     <input type="email" placeholder="Ваш Email" name="email" id="email" title="Мыло" value="{{ user.email }}">
-
-    <label style="font-family: 'Comfortaa', cursive;" for="password">Пароль<img src="/static/icons/padlock.png" class="icon-login"></label>
-    <input type="password" placeholder="Ваш Пароль" id="password" name="password" title="Пароль">
-    <label><input type="checkbox" style="height: 20px;">Показать пароль</label><br><br>
 
     <button type="submit" class="view, button-28" title="Войти">Сохранить изменение аккаунта</button><br><br>
 </form>

@@ -12,25 +12,9 @@
     </head>
 </html>
 <body>
-  <div class="header">
-    <a class="logo">Кванториум-Новоуральск<img src="/static/icons/Logo.png" style="height: 20px; width: 20px;"></a>
-    <div class="header-right">
-      <a href="/">Главная</a>
-      <a class="active" href="/products">Новости</a>
-      <a href="game">Игра о Кванториуме</a>
-      <a href="@">Направления и программы</a>
-      <a href="@">Мероприятия</a>
-      <a href="/courses">Курсы</a>
-      <a href="/login">Войти на сайт</a>
-      <div class="ProfilePanel">
-        <a href="profile"><img src="/static/Profile-Card/Stepa.jpg">Профиль</a>
-    </div>
-    </div>
-  </div>
+{% include 'header.html' %}
 
-  <br>
-
-
+<br>
 <div class="News-card">
   <div class="News-card-logo">
   </div>
@@ -81,32 +65,6 @@
     </div>
   </div>
 </div>
-</div> 
 
-<footer class="footer-distributed" style="bottom: -250px;">
-  <div class="footer-left">
-    <p class="footer-links">
-    <a class="link-1" href="/">Главная</a>
-    <a href="/game">Игра об Кванториум</a>
-    <a href="/About">О нас</a>
-    <a href="/sponsor">Спонсоры</a>
-    <a href="/create_feedback">Обратная связь</a>
-    </p>
-  <div class="footer-center">
-  <div>
-    <i class="fa fa-map-marker"></i>
-    <p><span>Обл: Свердловская</span>Город: Новоуральск</p>
-  </div>
-  <div>
-    <i class="fa fa-phone"></i>
-    <p>+7.902.456.76.99</p>
-  </div>
-  <div>
-    <i class="fa fa-envelope"></i>
-    <p><a href="mailto:Qvant323@yandex.ru">Qvant323@yandex.ru</a></p>
-  </div>
-  </div>
-    <p style="margin-left: 820px;">Mikhaelovsk &copy; 2023</p>
-  </div>
-</footer>
+{% include 'footer.html' %}
 </body>

@@ -260,7 +260,15 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .hero-profile-img {
-  height: 70%;
+  height: 17rem;
+	transition: all 0.5s;
+}
+
+.hero-profile-img:hover {
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+	transition: 1s; 
+	transform: scale(1.1);
 }
 
 .hero-description-bk {
@@ -301,6 +309,7 @@ body::-webkit-scrollbar-thumb:hover {
   left: 150px;
   bottom: 26%;
 }
+
 .hero-date {
   position: absolute;
   color: #fff;
@@ -389,6 +398,21 @@ body::-webkit-scrollbar-thumb:hover {
   width: 60px;
 }
 
+.News-card-logo img {
+  display: grid;
+  align-content: space-around;
+  justify-content: center;
+  background-color: rgba(0, 250, 0, 0.7);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin-left: -30px;
+}
+.News-card-logo{
+  display: flex;
+  justify-content: center;
+}
+
 .News-card-logo,
 .News-card-header {
   text-align: center;
@@ -410,6 +434,7 @@ body::-webkit-scrollbar-thumb:hover {
          border: 1px solid #FF4343;
          background: #FF9C9C;
 }
+
 
 .hr-washed {
 	margin: 20px 0;

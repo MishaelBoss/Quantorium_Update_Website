@@ -13,49 +13,41 @@
     </head>
 </html>
 <body>
-
-  <div class="header">
-    <a class="logo">Кванториум-Новоуральск<img src="/static/icons/Logo.png" style="height: 20px; width: 20px;"></a>
-    <div class="header-right">
-      <a href="/">Главная</a>
-      <a href="/products">Новости</a>
-      <a href="@">Игра о Кванториуме</a>
-      <a href="@">Направления и программы</a>
-      <a href="@">Мероприятия</a>
-      <a href="@">Курсы</a>
-      <a class="active" href="/login">Войти на сайт</a>
-    </div>
-  </div>
-
+{% include 'header.html' %}
 <script src="/static/js/password.js"></script>
 
 <form style="position: absolute; height: 860px; margin-top: 50px;" action="" method="post" method="POST" action="/register" enctype="multipart/form-data">
-    <h3>Регистрация</h3>
+  <h3>Регистрация</h3>
 
-    <label for="username">Логин</label>
-    <input type="text" name="login" placeholder="Логин" id="login">
+  <br>
+  {% for cat, msg in get_flashed_messages(True) %}
+  <di class="flash {{cat}}">{{ msg }}</di>
+  {% endfor %}
 
-    <label for="username">Имя</label>
-    <input type="text" name="name" placeholder="Имя" id="name">
+  <label for="username">Логин</label>
+  <input type="text" name="login" placeholder="Логин" id="login">
 
-    <label for="surname">Фамилия</label>
-    <input type="text" name="surname" placeholder="Фамилия" id="surname">
+  <label for="username">Имя</label>
+  <input type="text" name="name" placeholder="Имя" id="name">
 
-    <label for="email">Email</label>
-    <input type="email" name="email" placeholder="email" id="email">
+  <label for="surname">Фамилия</label>
+  <input type="text" name="surname" placeholder="Фамилия" id="surname">
 
-    <label for="password">Пароль</label>
-    <input type="password" id="password" placeholder="Введите пароль" name="password">
+  <label for="email">Email</label>
+  <input type="email" name="email" placeholder="email" id="email">
 
-    <div class="inputUserImage">
-      <label for="file">Картинка профиля</label>
-      <input class="inputUserImage" type="file" name="file">
-    </div>
+  <label for="password">Пароль</label>
+  <input type="password" id="password" placeholder="Введите пароль" name="password">
 
-    <button type="submit">Зарегистрироваться</button>
-    <div class="reg">
-      <a href="/login">Войти</a>
-    </div>
+  <div class="inputUserImage">
+    <label for="file">Картинка профиля</label>
+    <input class="inputUserImage" type="file" name="file">
+  </div>
+
+  <button type="submit">Зарегистрироваться</button>
+  <div class="reg">
+    <a href="/login">Войти</a>
+  </div>
 </form>
 
 </body>

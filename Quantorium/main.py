@@ -72,7 +72,6 @@ class User(db.Model):
     email = db.Column(db.String(150), nullable=False, unique=True)
     password = db.Column(db.Text(), nullable=False)
     pathUser = db.Column(db.Integer, nullable=False)
-    is_super_user = db.Column(db.Boolean, default=False, nullable=False)
     date = db.Column(db.DateTime(), default=datetime.utcnow)
     last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
 
@@ -89,6 +88,8 @@ def index():
 
 @app.route("/register", methods=("POST", "GET"))
 def register():
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
     if request.method == "POST":
         login= request.form['login']
         name = request.form['name']
@@ -102,7 +103,7 @@ def register():
             return 'Имя пользователя уже существует'
 
         try:
-            pathUser = f'static/imgesUser/{login}'
+            pathUser = f'static/imgesUser/{login}/{name}'
             os.makedirs(pathUser)
             pathUser += '/image.png'
             image.save(pathUser)
@@ -113,13 +114,14 @@ def register():
             db.session.commit()
             return redirect('/login')
         except:
-            return "Что то пошло не так"
+            flash('Что то пошло не так', category='error')
     else:
-            return render_template("register.html")
+            return render_template("register.html", user=user)
 
 @app.route('/login', methods=['POST', "GET"])
 def login():
     name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
     if request.method == 'POST':
         login= request.form['login']
         password = request.form['password']
@@ -130,18 +132,15 @@ def login():
             resp.set_cookie('user', user.login)
             return resp
         else:
-            return 'Неверный пароль или имя!'
+            flash('Неверный пароль или имя', category='error')
     
-    return render_template('login.html')
+    return render_template('login.html', user=user)
 
 @app.route('/profile')
 def profile():
     name = request.cookies.get('user')
     if name is None:
-        date = name.date
         return redirect('/login')
-    else:
-        date = None
     user = User.query.filter_by(login=name).first()
     return render_template('profile.html', user=user)
 
@@ -156,13 +155,9 @@ def profile_edit():
         email = request.form['email']
         name = request.form['name']
         surname = request.form['surname']
-        password = request.form['password']
         image = request.files['file']
 
-        if password!= '':
-            user.password = hashlib.md5(password.encode("utf-8")).hexdigest()
-
-        pathUser = f'static/imgesUser/{login}'
+        pathUser = f'static/imgesUser/{login}/{name}'
         os.makedirs(pathUser)
         pathUser += '/image.png'
         image.save(pathUser)
@@ -175,6 +170,7 @@ def profile_edit():
         return redirect('/profile')
     else:
         return render_template('profile_edit.html', user=user)
+    
 
 @app.route('/logout')
 def logout():
@@ -182,19 +178,22 @@ def logout():
     resp.set_cookie('user', '', expires=0)
     return resp
 
+
 @app.route('/Buy')
 def Buy():
     name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
     if name is None:
         return redirect('/login')
-    return render_template("Buy.html")
+    return render_template("Buy.html", user=user)
+
 
 @app.route('/Admin')
 def admin():
     name = request.cookies.get('user')
     user = User.query.filter_by(login=name).first()
-    user = User.query.all()
-    return render_template("Admin-Index.html", user=user)
+    return render_template("admin-Index.html")
+    
 
 @app.route('/direction_and_programs')
 def Direction_and_programs():
@@ -202,11 +201,13 @@ def Direction_and_programs():
     user = User.query.filter_by(login=name).first()
     return render_template("direction_and_programs.html", user=user)
 
+
 @app.route('/game')
 def Game():
     name = request.cookies.get('user')
     user = User.query.filter_by(login=name).first()
     return render_template("MyGame.html", user=user)
+
 
 @app.route('/it')
 def IT():
@@ -214,11 +215,13 @@ def IT():
     user = User.query.filter_by(login=name).first()
     return render_template("IT.html", user=user)
 
+
 @app.route('/vr')
 def VR():
     name = request.cookies.get('user')
     user = User.query.filter_by(login=name).first()
     return render_template("VR.html", user=user)
+
 
 @app.route('/High_tech')
 def High_tech():
@@ -227,11 +230,13 @@ def High_tech():
     return render_template("High_tech.html", user=user)
 
 
+
 @app.route('/mathematics')
 def Mathematics():
     name = request.cookies.get('user')
     user = User.query.filter_by(login=name).first()
     return render_template("Mathematics.html", user=user)
+
 
 @app.route('/ai')
 def AI():
@@ -239,11 +244,13 @@ def AI():
     user = User.query.filter_by(login=name).first()
     return render_template("ai.html", user=user)
 
+
 @app.route('/chess')
 def Chess():
     name = request.cookies.get('user')
     user = User.query.filter_by(login=name).first()
     return render_template("Chess.html", user=user)
+
 
 @app.route('/promrobo')
 def Promrobo():
@@ -251,11 +258,13 @@ def Promrobo():
     user = User.query.filter_by(login=name).first()
     return render_template("Promrobo.html", user=user)
 
+
 @app.route('/technical_english')
 def Technical_English():
     name = request.cookies.get('user')
     user = User.query.filter_by(login=name).first()
     return render_template("Technical_English.html", user=user)
+
 
 @app.route('/sponsor')
 def Sponsor():
@@ -263,17 +272,22 @@ def Sponsor():
     user = User.query.filter_by(login=name).first()
     return render_template("Sponsor.html", user=user)
 
+
 @app.route('/account_change')
 def account_change():
     name = request.cookies.get('user')
     user = User.query.filter_by(login=name).first()
     return render_template("account_change.html", user=user)
 
+
 @app.route('/courses')
 def Courses():
     name = request.cookies.get('user')
     user = User.query.filter_by(login=name).first()
+    if name is None:
+        return redirect('/login')
     return render_template("Courses.html", user=user)
+
 
 @app.route('/About')
 def about():
@@ -281,16 +295,19 @@ def about():
     user = User.query.filter_by(login=name).first()
     return render_template("About.html", user=user)
 
+
 @app.route('/moregame')
 def MoreGame():
     name = request.cookies.get('user')
     user = User.query.filter_by(login=name).first()
     return render_template("MoreDetailGame.html", user=user)
 
+
 @app.route('/event_detail/<int:id>')
 def event_detail(id):
     event = Event.query.get(id)
     return render_template("event_detail.html", event=event)
+
 
 @app.route('/event/<int:id>/del')
 def event_del(id):
@@ -301,6 +318,7 @@ def event_del(id):
         return redirect('/')
     except:
         return "При удаление ароизошла ошибка"
+    
 
 @app.route('/event')
 def event():
@@ -308,6 +326,7 @@ def event():
     user = User.query.filter_by(login=name).first()
     event = Event.query.order_by(Event.date_event.desc()).all()
     return render_template("event.html", event=event, user=user)
+
 
 @app.route('/create_event', methods=["POST", "GET"])
 def create_event():
@@ -326,6 +345,7 @@ def create_event():
             return "Ошибка создание поста"
     else:
             return render_template("create-event.html")
+    
     
 @app.route('/create_comment', methods=["POST", "GET"])
 def Comments():
@@ -354,6 +374,7 @@ def Comments():
         else:
                 return render_template("create_comments.html", user=user)
         
+        
 @app.route('/comment_delete/<int:id>/del')
 def comment_delete(id):
     comment = Comment.query.get_or_404(id)
@@ -364,6 +385,7 @@ def comment_delete(id):
         return redirect('/products')
     except:
         return "При удаление ароизошла ошибка"
+    
     
 @app.route('/comment/<int:id>/update', methods=['POST', 'GET'])
 def comment_update(id):
@@ -379,6 +401,7 @@ def comment_update(id):
             return "Опа"
     else:
             return render_template("products_update.html", comment=comment)
+    
             
 @app.route('/create_feedback', methods=["POST", "GET"])
 def create_feedback():
@@ -402,6 +425,7 @@ def create_feedback():
             return "Ошибка"
     else:
             return render_template("create_feedback.html", user=user)
+    
 
 @app.route('/bell')
 def Bell():
@@ -411,6 +435,7 @@ def Bell():
 
     return render_template("bell.html", bell=bell, user=user)
 
+
 @app.route('/bell_feedback_detail/<int:id>')
 def bell_feedback_detail(id):
     name = request.cookies.get('user')
@@ -418,6 +443,7 @@ def bell_feedback_detail(id):
 
     bell = Feedback.query.get(id)
     return render_template("bell_feedback_detail.html", bell=bell, user=user)
+
 
 @app.route('/feedback/<int:id>/del')
 def Feedback_delete(id):
@@ -428,14 +454,18 @@ def Feedback_delete(id):
         return redirect('/bell')
     except:
         return "При удаление ароизошла ошибка"
+    
 
 @app.route('/products')
 def products():
     name = request.cookies.get('user')
     user = User.query.filter_by(login=name).first()
+    if name is None:
+        return redirect('/login')
 
     articles = Article.query.order_by(Article.date.desc()).all()
     return render_template("products.html", articles=articles, user=user)
+
 
 @app.route('/products/<int:id>')
 def products_detail(id):
@@ -444,7 +474,7 @@ def products_detail(id):
 
     article = Article.query.get(id)
     comment = Comment.query.order_by(Comment.date_post.desc()).all()
-    return render_template("products_detail.html", article=article, comment=comment, user=user)
+    return render_template("products_detail.html", user=user, article=article, comment=comment)
 
 
 @app.route('/products/<int:id>/del')
@@ -457,6 +487,7 @@ def products_delete(id):
         return redirect('/products')
     except:
         return "При удаление ароизошла ошибка"
+    
     
 @app.route('/products/<int:id>/update', methods=['POST', 'GET'])
 def products_update(id):
@@ -473,6 +504,14 @@ def products_update(id):
             return "Опа"
     else:
             return render_template("products_update.html", article=article)
+
+@app.route('/UploadPhoto', methods=['POST', 'GET'])
+def upload_photo():
+    name = request.cookies.get('user')
+    user = User.query.filter_by(login=name).first()
+    if name is None:
+        return redirect('/login')
+    return render_template("uploadPhoto.html", user=user)
 
 
 @app.route('/Create-product', methods=['POST', 'GET'])
@@ -499,9 +538,11 @@ def Create_product():
     else:
             return render_template("Create-product.html")
     
+    
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
 
 if __name__ == "__main__":
     app.run(debug=True, host=HOST, port=PORT)

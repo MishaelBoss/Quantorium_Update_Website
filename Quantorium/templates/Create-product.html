@@ -11,71 +11,22 @@
     </head>
 </html>
 <body>
-<div class="header">
-  <a class="logo">Кванториум-Новоуральск<img src="/static/icons/Logo.png" style="height: 20px; width: 20px;"></a>
-  <div class="header-right">
-    <a href="/Admin">Главная</a>
-    <a href="/products">Новости</a>
-    <a class="active" href="/Create-product">Создать новость</a>
-    <a href="/game">Игра о Кванториуме</a>
-    <a href="/direction_and_programs">Направления и программы</a>
-    <a href="/event">Мероприятия</a>
-    <a href="/create_event">Создать мероприятия</a>
-    <a href="/courses">Курсы</a>
-    <a href="/login">Войти на сайт</a>
-    <div class="ProfilePanel">
-      {% if not user %}
-        <a href="profile"><img src="/static/icons/user-default.png" alt="Изображение по умолчанию"><h1>Профиль</h1></a>
-      {% else %}
-        <a href="profile"><img src="{{user.pathUser}}" alt="logo"><h1>{{user.name}}</h1></a>
-      {% endif %}
-    </div>
-    <div class="ProfilePanel">
-        <a href="/bell"><img src="/static/icons/bell.png">Сообщение</a>
-    </div>
+{% include 'header.html' %}
+
+<br>
+<h1 style="text-align: center; color: darkmagenta; font-family: Impact, Haettenschweiler">Выложить пост</h1>
+
+<div class="card" style="max-width: 1300px; max-height: 1300px; margin-left: auto; margin-right: auto; border-radius: 4rem;" >
+  <div class="infos" style="text-align: center;">
+    <form method="post" enctype="multipart/form-data">
+        <input type="text" name="title" id="title" value="Имя поста" style="font-family: 'Comfortaa', cursive; height: 30px; width: 250px;"><br>
+        <textarea name="intro" id="intro" cols="30" rows="10" style="font-family: 'Comfortaa', cursive;" placeholder="Краткое описание поста"></textarea><br>
+        <textarea name="text" id="text" cols="30" rows="10" style="font-family: 'Comfortaa', cursive;" placeholder="Полное описание поста"></textarea><br>
+        <input type="file" name="file">
+      <input class="view, button-28" type="submit" value="отправить" style="border-radius: 4rem; width: 500px;">
+    </form>
   </div>
 </div>
 
-    <br>
-    <h1 style="text-align: center; color: darkmagenta; font-family: Impact, Haettenschweiler">Выложить пост</h1>
-
-
-    <div class="card" style="max-width: 1300px; max-height: 1300px; margin-left: auto; margin-right: auto; border-radius: 4rem;" >
-        <div class="infos" style="text-align: center;">
-                <form method="post" enctype="multipart/form-data">
-                  <input type="text" name="title" id="title" value="Имя поста" style="font-family: 'Comfortaa', cursive; height: 30px; width: 250px;"><br>
-                  <textarea name="intro" id="intro" cols="30" rows="10" style="font-family: 'Comfortaa', cursive;">Краткое описание поста</textarea><br>
-                  <textarea name="text" id="text" cols="30" rows="10" style="font-family: 'Comfortaa', cursive;">Полное описание поста</textarea><br>
-                  <input type="file" name="file">
-                  <input class="view, button-28" type="submit" value="отправить" style="border-radius: 4rem; width: 500px;">
-                </form>
-        </div>
-     </div>
-
-<footer class="footer-distributed">
-  <div class="footer-left">
-    <p class="footer-links">
-    <a class="link-1" href="/">Главная</a>
-    <a href="/game">Игра о Кванториум</a>
-    <a href="/About">О нас</a>
-    <a href="/sponsor">Спонсоры</a>
-    <a href="/create_feedback">Обратная связь</a>
-    </p>
-  <div class="footer-center">
-  <div>
-    <i class="fa fa-map-marker"></i>
-    <p><span>Обл: Свердловская</span>Город: Новоуральск</p>
-  </div>
-  <div>
-    <i class="fa fa-phone"></i>
-    <p>+7.902.456.76.99</p>
-  </div>
-  <div>
-    <i class="fa fa-envelope"></i>
-    <p><a href="mailto:Qvant323@yandex.ru">Qvant323@yandex.ru</a></p>
-  </div>
-  </div>
-    <p style="margin-left: 820px;">Mikhaelovsk &copy; 2023</p>
-  </div>
-</footer>
+{% include 'footer.html' %}
 </body>

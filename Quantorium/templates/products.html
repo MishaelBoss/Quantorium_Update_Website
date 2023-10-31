@@ -12,6 +12,7 @@
 </html>
 <body>
 {% include 'header.html' %}
+<script src="/static/js/redirects.js"></script>
 <br><br><br><br>
 <h1 style="text-align: center; color: blueviolet; font-family: Impact, Haettenschweiler">Новости от админа</h1>
 
@@ -19,7 +20,7 @@
 {% if articles|length > 0 %}
   {% for el in articles%}
   <div class="first hero">
-    <img class="hero-profile-img" src="{{ el.path }}">
+    <button onclick="redirect('/products/{{ el.id }}')"><img class="hero-profile-img" src="{{ el.path }}"></button>
     <div class="hero-description-bk"></div>
     <div class="hero-description">
       <h2 style="font-family: 'Comfortaa', cursive;"> {{ el.title }} </h2>
@@ -38,5 +39,7 @@
 {% endif %}
 </div>
 
+<br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br>
 {% include 'footer.html' %}
 </body>

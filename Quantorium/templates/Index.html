@@ -26,6 +26,8 @@
 
 </header>
 
+{% if not user %}
+{% else %}
 <div class="News-card">
   <div class="News-card-logo">
     <img src="##" style="border-radius: 50%; height: 100px; width: 100px;" alt="logo">
@@ -43,7 +45,7 @@
     display: grid;
     align-content: center;">Админ панель</button>
 </div>
-
+{% endif %}
 <img src="/static/icons/Logo.png" style="margin: 10px auto 20px; display: block; padding: 8rem 0 0 0;">
 
 <p style="font-size: 2rem; color: black; text-align: center;">Детский технопарк «Кванториум-Новоуральск» — это уникальный центр дополнительного образования.

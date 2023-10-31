@@ -12,22 +12,14 @@
     </head>
 </html>
 <body>
-
-  <div class="header">
-    <a class="logo">Кванториум-Новоуральск<img src="/static/icons/Logo.png" style="height: 20px; width: 20px;"></a>
-    <div class="header-right">
-      <a href="/">Главная</a>
-      <a href="/products">Новости</a>
-      <a href="@">Игра о Кванториуме</a>
-      <a href="@">Направления и программы</a>
-      <a href="@">Мероприятия</a>
-      <a href="@">Курсы</a>
-      <a class="active" href="/login">Войти на сайт</a>
-    </div>
-  </div>
-
-<form style="height: 450px;" method="post">
+{% include 'header.html' %}
+<form style="height: 500px;" method="post">
     <h3>Login</h3>
+
+    <br>
+    {% for cat, msg in get_flashed_messages(True) %}
+    <di class="flash {{cat}}">{{ msg }}</di>
+    {% endfor %}
 
     <label for="username">Введите логин</label>
     <input type="text" name="login" placeholder="Логин" id="login">

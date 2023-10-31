@@ -13,6 +13,8 @@
 </html>
 <body>
 {% include 'header.html' %}
+
+<script src="/static/js/redirects.js"></script>
 <header class="header2"  style="margin-top: -20px; background-image: url('/static/images/BG/eventBG.jpg');">
     <h1 class="headh1 h1" style="font-size: 5rem;">
         Анонсы мероприятий
@@ -23,7 +25,7 @@
 {% if event|length > 0 %}
   {% for el in event%}
   <div class="first hero">
-    <img class="hero-profile-img" src="/static/images/BG/BgVR.jpg">
+    <button onclick="redirect('/event_detail/{{ el.id }}')"><img class="hero-profile-img" src="/static/images/BG/BgVR.jpg"></button>
     <div class="hero-description-bk"></div>
     <div class="hero-logo">
       <img src="/static/icons/VRAR-квантум.png">

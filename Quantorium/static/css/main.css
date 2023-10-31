@@ -425,7 +425,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 /* css для обратной связи ошибка & отправка */
-.flash {padding: 10px;}
+.flash {padding: 10px; display: flex; justify-content: center;}
 .flash.success {
          border: 1px solid #21DB56;
          background: #AEFFC5;

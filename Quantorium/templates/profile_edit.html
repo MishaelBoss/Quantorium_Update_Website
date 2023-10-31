@@ -16,8 +16,12 @@
 <body>
 {% include 'header.html' %}
 
-<form style="position: absolute; height: 800px; margin-top: 200px;" action="" method="post" method="POST" action="/register" enctype="multipart/form-data" action="/pathUser">
+<form style="position: absolute; height: 820px; margin-top: 200px;" action="" method="post" method="POST" action="/register" enctype="multipart/form-data" action="/pathUser">
   <h1>Изменить профиль</h1>
+  <br>
+  {% for cat, msg in get_flashed_messages(True) %}
+    <di class="flash {{cat}}">{{ msg }}</di>
+  {% endfor %}
   <div class="News-card-logo">
     <div class="inputUserImage">
       <label for="file">Фото профиля</label>

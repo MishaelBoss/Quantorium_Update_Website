@@ -179,6 +179,7 @@ def profile_edit():
         db.session.commit()
         return redirect('/profile')
     else:
+        flash('Что то пошло не так', category='error')
         return render_template('profile_edit.html', user=user)
     
 

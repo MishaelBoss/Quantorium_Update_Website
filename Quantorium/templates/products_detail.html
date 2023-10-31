@@ -57,13 +57,25 @@
 </div>
 
 <br><br><br><br><br><br>
-<div class="Photo">
-  <img src="/static/BGPhoto/BGtest.jpg" onclick="openModal();currentSlide(1)" class="Photo-img">
-  <div class="Photo-description-bk"></div>
-  <div class="Photo-description">
-    <p>Дата публикации:</p>
+<hr class="hr-washed">
+
+{% if objects %}
+{% for i in objects %}
+  {% if i.preview_path %}
+  <div class="Photo">
+    <img src="/static/BGPhoto/BGtest.jpg" class="Photo-img">
+    <div class="Photo-description-bk"></div>
+    <div class="Photo-description">
+      <p>Дата публикации:</p>
+    </div>
   </div>
-</div>
+  {% endif %}
+{% endfor %}
+{% else %}
+<h1 style="text-align: center;">Автор не добавил изображение</h1>
+{% endif %}
+
+<hr class="hr-washed">
 
 <br><br>
 <div class="first_page" style="bottom: -130px;">

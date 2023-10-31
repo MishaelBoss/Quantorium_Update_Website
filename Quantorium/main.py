@@ -77,6 +77,16 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.id
+    
+
+class Image(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), unique=True)
+    dateR = db.Column(db.DateTime, default=datetime.utcnow())
+    type_object = db.Column(db.String(50), default='public')
+
+    def __repr__(self):
+        return '<Image %r>' % self.id
 
 
 @app.route('/')
@@ -460,8 +470,6 @@ def Feedback_delete(id):
 def products():
     name = request.cookies.get('user')
     user = User.query.filter_by(login=name).first()
-    if name is None:
-        return redirect('/login')
 
     articles = Article.query.order_by(Article.date.desc()).all()
     return render_template("products.html", articles=articles, user=user)
@@ -511,7 +519,26 @@ def upload_photo():
     user = User.query.filter_by(login=name).first()
     if name is None:
         return redirect('/login')
-    return render_template("uploadPhoto.html", user=user)
+    if request.method == 'POST':
+        try:
+            image = request.files['image']
+            images = list(Image.query.filter_by(album_id=name))
+            name = str(len(images)) + '.png'
+            try:
+                os.makedirs(f'static/imges_news/upload/{name}')
+            except:
+                pass
+            path = f'static/imges_news/upload/{name}'
+            image_obj = Image(path=path)
+            image.save(path)
+            db.session.add(image_obj)
+            db.session.commit()
+            return redirect(f'/')
+        except Exception as ex:
+            print(ex)
+            return redirect(f'static/imges_news/{name}')
+    else:
+        return render_template("uploadPhoto.html", user=user)
 
 
 @app.route('/Create-product', methods=['POST', 'GET'])

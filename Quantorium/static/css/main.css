@@ -21,6 +21,11 @@ body{
     background-size: cover;
 }
 
+body.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
 body::-webkit-scrollbar {
   width: 1em;
 }

@@ -11,11 +11,6 @@
   border-radius: 0 0 20px 20px;
 }
 
-.header.dark-mode {
-  background-color: #333;
-  color: #fff;
-}
-
 .header a {
   float: left;
   color: black;

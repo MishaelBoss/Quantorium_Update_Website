@@ -40,56 +40,12 @@
 <br>
 <header class="header2"  style="margin-top: -20px;">
   <h1 class="headh1 h1" style="font-size: 5rem;">
-    Добро пожаловать: Михаил Яковлев
+    Добро пожаловать: 
   </h1>
   <h1 class="headh1 h1" style="font-size: 2rem;">
     Админ панель
   </h1>
 </header>
-
-<br><br><br><br>
-<table class="table">
-	<thead>
-		<tr>
-      <th>ID</th>
-			<th>Имя</th>
-			<th>Фамилия</th>
-			<th>Email</th>
-			<th>DelAdmin/Banned</th>
-			<th>SetAdmin</th>
-		</tr>
-	</thead>
-	<tbody>
-    {% for user in user %}
-		<tr>
-      <td>{{ user.id }}</td>
-			<td>{{ user.name }}</td>
-			<td>{{ user.surname }}</td>
-			<td>{{ user.email }}</td>
-			<td><a class="view, button-28" href="" style="
-        position: relative;
-        border-radius: 4rem; 
-        width: 150px; 
-        height: 20px; 
-        min-height: 50px;
-        margin-left: auto;
-        margin-right: auto;
-        display: grid;
-        align-content: center;">Снять админку</a></td>
-			<td><a class="view, button-28" href="" style="
-        position: relative;
-        border-radius: 4rem; 
-        width: 150px; 
-        height: 20px; 
-        min-height: 50px;
-        margin-left: auto;
-        margin-right: auto;
-        display: grid;
-        align-content: center;">Выдать админку</a></td>
-		</tr>
-    {% endfor %}
-	</tbody>
-</table>
 
 <footer class="footer-distributed">
   <div class="footer-left">

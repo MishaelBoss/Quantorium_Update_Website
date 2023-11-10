@@ -20,6 +20,11 @@ DEBUG = True
 server_address = '127.0.0.1:5000'
 db = SQLAlchemy(app)
 
+admins = open('admins.txt', 'r').read().split('\n')
+
+sender_email = 'michaelvoov@yandex.ru'
+sender_password = '12345'
+
 class Article(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(60), nullable=False)
@@ -113,7 +118,7 @@ def register():
             return 'Имя пользователя уже существует'
 
         try:
-            pathUser = f'static/imgesUser/{login}/{name}'
+            pathUser = f'static/imgesUser/{login}'
             os.makedirs(pathUser)
             pathUser += '/image.png'
             image.save(pathUser)
@@ -167,7 +172,7 @@ def profile_edit():
         surname = request.form['surname']
         image = request.files['file']
 
-        pathUser = f'static/imgesUser/{login}/{name}'
+        pathUser = f'static/imgesUser/{login}'
         os.makedirs(pathUser)
         pathUser += '/image.png'
         image.save(pathUser)
@@ -179,7 +184,6 @@ def profile_edit():
         db.session.commit()
         return redirect('/profile')
     else:
-        flash('Что то пошло не так', category='error')
         return render_template('profile_edit.html', user=user)
     
 
@@ -199,10 +203,14 @@ def Buy():
     return render_template("Buy.html", user=user)
 
 
-@app.route('/Admin')
+@app.route('/admin')
 def admin():
     name = request.cookies.get('user')
-    user = User.query.filter_by(login=name).first()
+    global admins
+    name = request.cookies.get('user')
+    admins = open('admins.txt', 'r').read().split('\n')
+    if not name in admins:
+        return redirect('/login')
     return render_template("admin-Index.html")
     
 
@@ -513,33 +521,6 @@ def products_update(id):
             return "Опа"
     else:
             return render_template("products_update.html", article=article)
-
-@app.route('/UploadPhoto', methods=['POST', 'GET'])
-def upload_photo():
-    name = request.cookies.get('user')
-    user = User.query.filter_by(login=name).first()
-    if name is None:
-        return redirect('/login')
-    if request.method == 'POST':
-        try:
-            image = request.files['image']
-            images = list(Image.query.filter_by(album_id=name))
-            name = str(len(images)) + '.png'
-            try:
-                os.makedirs(f'static/imges_news/upload/{name}')
-            except:
-                pass
-            path = f'static/imges_news/upload/{name}'
-            image_obj = Image(path=path)
-            image.save(path)
-            db.session.add(image_obj)
-            db.session.commit()
-            return redirect(f'/')
-        except Exception as ex:
-            print(ex)
-            return redirect(f'static/imges_news/{name}')
-    else:
-        return render_template("uploadPhoto.html", user=user)
 
 
 @app.route('/Create-product', methods=['POST', 'GET'])

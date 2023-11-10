@@ -26,8 +26,6 @@
 
 </header>
 
-{% if not user %}
-{% else %}
 <div class="News-card">
   <div class="News-card-logo">
     <img src="##" style="border-radius: 50%; height: 100px; width: 100px;" alt="logo">
@@ -37,7 +35,7 @@
     <hr class="hr-washed">
       <h1 style="font-family: 'Comfortaa', cursive;">Login: </h1>
   </div>
-    <button class="view, button-28" onclick="redirect('/Admin')" style="
+    <button class="view, button-28" onclick="redirect('/admin')" style="
     border-radius: 4rem; 
     width: 150px; 
     height: 20px; 
@@ -45,7 +43,7 @@
     display: grid;
     align-content: center;">Админ панель</button>
 </div>
-{% endif %}
+
 <img src="/static/icons/Logo.png" style="margin: 10px auto 20px; display: block; padding: 8rem 0 0 0;">
 
 <p style="font-size: 2rem; color: black; text-align: center;">Детский технопарк «Кванториум-Новоуральск» — это уникальный центр дополнительного образования.
@@ -207,15 +205,6 @@
     </div>
   </div>
 </div>
-</div>
-
-<div class="btn-container">
-  <i class="fa fa-sun-o" aria-hidden="true"></i>
-  <label class="switch btn-color-mode-switch">
-      <input type="checkbox" id="toggle-button" value="1">
-      <label for="toggle-button" data-on="Dark" data-off="Light" class="btn-color-mode-switch-inner"></label>
-  </label>
-  <i class="fa fa-moon-o" aria-hidden="true"></i>
 </div>
 
 <script src="/static/js/redirects.js"></script>

@@ -20,7 +20,7 @@
   <di class="flash {{cat}}">{{ msg }}</di>
 {% endfor %}
 
-<form style="height: 520px;" method="post">
+<form method="post">
     <h3>Login</h3>
 
     <label for="username">Введите логин</label>
@@ -28,7 +28,9 @@
 
     <label for="password">Пароль</label>
     <input autocomplete="on" type="password" name="password" placeholder="Password" id="password">
-    <input style="width: 2rem;" type="checkbox" onclick="checking()"><p>Show Password</p>
+    <div style="display: flex; align-items: center;">
+      <input style="width: 1rem; margin: auto;" type="checkbox" onclick="checking()"><p style="margin-right: 180px;">Show Password</p>
+    </div>  
 
     <button>Войти</button>
     <div class="reg">

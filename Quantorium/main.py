@@ -20,11 +20,6 @@ DEBUG = True
 server_address = '127.0.0.1:5000'
 db = SQLAlchemy(app)
 
-admins = open('admins.txt', 'r').read().split('\n')
-
-sender_email = 'michaelvoov@yandex.ru'
-sender_password = '12345'
-
 class Article(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(60), nullable=False)
@@ -77,6 +72,7 @@ class User(db.Model):
     email = db.Column(db.String(150), nullable=False, unique=True)
     password = db.Column(db.Text(), nullable=False)
     pathUser = db.Column(db.Integer, nullable=False)
+    is_super_user = db.Column(db.Boolean, default=False, nullable=False)
     date = db.Column(db.DateTime(), default=datetime.utcnow)
     last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
 
@@ -112,6 +108,12 @@ def register():
         email = request.form['email']
         password = request.form['password']
         image = request.files['file']
+        exists = db.session.query(User.id).filter_by(login=login).first() is not None
+        if not exists:
+            if User.query.first() is None:
+                is_super_user = True
+            else:
+                is_super_user = False
 
         user = User.query.filter_by(name=name).first()
         if user:
@@ -123,11 +125,16 @@ def register():
             pathUser += '/image.png'
             image.save(pathUser)
 
-            new_user = User(name=name, surname=surname, email=email, password=password, login=login, pathUser=pathUser)
-
-            db.session.add(new_user)
-            db.session.commit()
-            return redirect('/login')
+            new_user = User(name=name, surname=surname, email=email, password=password, login=login, pathUser=pathUser, is_super_user=is_super_user)
+            try:
+                db.session.add(new_user)
+                db.session.commit()
+                resp = make_response(redirect("/"))
+                resp.set_cookie('user', user.login)
+                return resp
+            except Exception as ex:
+                print(ex)
+                return redirect("/register")
         except:
             flash('Что то пошло не так', category='error')
     else:
@@ -206,10 +213,10 @@ def Buy():
 @app.route('/admin')
 def admin():
     name = request.cookies.get('user')
-    global admins
-    name = request.cookies.get('user')
-    admins = open('admins.txt', 'r').read().split('\n')
-    if not name in admins:
+    user = User.query.filter_by(login=name).first()
+    if not user.is_super_user or name is None:
+        return redirect('/login')
+    if name is None:
         return redirect('/login')
     return render_template("admin-Index.html")
     

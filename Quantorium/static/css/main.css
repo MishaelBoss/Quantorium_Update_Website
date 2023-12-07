@@ -400,17 +400,13 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .News-card-logo img {
-  width: 60px;
-}
-
-.News-card-logo img {
   display: grid;
   align-content: space-around;
   justify-content: center;
   background-color: rgba(0, 250, 0, 0.7);
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 70px;
+  height: 70px;
   margin-left: -30px;
 }
 .News-card-logo{

@@ -299,13 +299,6 @@ def Sponsor():
     return render_template("Sponsor.html", user=user)
 
 
-@app.route('/account_change')
-def account_change():
-    name = request.cookies.get('user')
-    user = User.query.filter_by(login=name).first()
-    return render_template("account_change.html", user=user)
-
-
 @app.route('/courses')
 def Courses():
     name = request.cookies.get('user')

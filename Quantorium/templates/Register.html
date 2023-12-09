@@ -1,42 +1,36 @@
 <!DOCTYPE html> 
 <html>
     <head>
-      <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
-      <link rel="stylesheet" href="{{ url_for('static', filename='css/panel.css')}}">
+      {% include 'url.html' %}
       <link rel="stylesheet" href="{{ url_for('static', filename='css/registr.css')}}">
       <link rel="stylesheet" href="{{ url_for('static', filename='css/adaptive.css')}}">
-      <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-      <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
-      <link href="../static/signup.css" rel="stylesheet">
-      <link rel="shortcut icon" sizes="32x32" href="{{ url_for('static', filename='icons/Logo.png')}}">
       <title>Регистрация</title>
     </head>
 </html>
 <body>
 {% include 'header.html' %}
-<script src="/static/js/password.js"></script>
 
 <br>
 {% for cat, msg in get_flashed_messages(True) %}
 <di class="flash {{cat}}">{{ msg }}</di>
 {% endfor %}
-<form style="position: absolute; height: 930px; margin-top: 150px;" action="" method="post" method="POST" action="/register" enctype="multipart/form-data">
+<form style="position: absolute; height: 900px; margin-top: 150px;" action="" method="post" method="POST" action="/register" enctype="multipart/form-data">
   <h3>Регистрация</h3>
 
   <div class="block-asterisk">
     <label for="username">Логин</label><img src="/static/icons/asterisk.png">
   </div>
-  <input type="text" name="login" placeholder="Логин" id="login">
+  <input type="text" name="login" placeholder="Логин" id="login" minlength="4" maxlength="22">
   
   <div class="block-asterisk">
     <label for="username">Имя</label><img src="/static/icons/asterisk.png">
   </div>
-  <input type="text" name="name" placeholder="Имя" id="name">
+  <input type="text" name="name" placeholder="Имя" id="name" minlength="2">
 
   <div class="block-asterisk">
     <label for="surname">Фамилия</label><img src="/static/icons/asterisk.png">
   </div>
-  <input type="text" name="surname" placeholder="Фамилия" id="surname">
+  <input type="text" name="surname" placeholder="Фамилия" id="surname" minlength="2">
 
   <div class="block-asterisk">
     <label for="email">Email</label><img src="/static/icons/asterisk.png">
@@ -47,7 +41,7 @@
     <label for="password">Пароль</label><img src="/static/icons/asterisk.png">
   </div>
   <li>Минимально длина парля 8</li>
-  <input autocomplete="on" type="password" name="password" placeholder="Password" id="password">
+  <input autocomplete="on" type="password" name="password" placeholder="Password" id="password" minlength="8" maxlength="255">
   <div style="display: flex; align-items: center;">
     <input style="width: 1rem; margin: auto;" type="checkbox" onclick="checking()"><p style="margin-right: 180px;">Show Password</p>
   </div>
@@ -63,4 +57,5 @@
   </div>
 </form>
 
+<script src="/static/js/password.js"></script>
 </body>

@@ -141,6 +141,7 @@ body::-webkit-scrollbar-thumb:hover {
     display: flex;
     flex-direction: column;
   }
+  
   .left {
     display: flex;
     flex-direction: column;
@@ -148,14 +149,21 @@ body::-webkit-scrollbar-thumb:hover {
     padding: 0 3em;
     width: minmax(80px, 80%);
   }
+
   .block { 
     display: flex;
     flex-direction: column;
     gap: .75em;
   }
+
   .content {
     font-size: 1.2em;
     color: #404040;
+    font-family: 'Cuprum', sans-serif;
+  }
+
+  .content b{
+    color: #9c1f9c;
   }
 
 .BlockCard{
@@ -313,6 +321,7 @@ body::-webkit-scrollbar-thumb:hover {
   font-weight: 900;
   left: 150px;
   bottom: 26%;
+  font-family: 'Russo One', sans-serif;
 }
 
 .hero-date {

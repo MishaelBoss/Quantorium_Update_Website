@@ -232,7 +232,7 @@ def Direction_and_programs():
 def Game():
     name = request.cookies.get('user')
     user = User.query.filter_by(login=name).first()
-    return render_template("MyGame.html", user=user)
+    return render_template("myGame.html", user=user)
 
 
 @app.route('/it')

@@ -6,6 +6,7 @@
   </head>
 </html>
 <body>
+
 {% include 'header.html' %}
 
 <header class="header2"  style="margin-top: -17px;">
@@ -13,6 +14,19 @@
     О нас
   </h1>
 </header>
+
+<div id="id01" class="modal">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Закрыть">&times;</span>
+  <form class="modal-content animate" action="../action_page.php" method="post">
+    <div class="container">
+      <h1 style="text-align: center; color: black; font-family: 'Rubik', sans-serif;">Наши ТГ</h1>
+    </div>
+    <div class="container" style="background-color:#f1f1f1">
+      <h1 style="color: black; font-family: 'Zen Maru Gothic', serif;"><b style="color: #FF5338; font-family: 'Zen Maru Gothic', serif;">@LisaSU_AMD </b>- Михаил Яковлев - <b style="color: #004EA8; font-family: 'Zen Maru Gothic', serif;">разработчик и дизайнер</b></h1>
+      <h1 style="color: black; font-family: 'Zen Maru Gothic', serif;"><b style="color: #FF5338; font-family: 'Zen Maru Gothic', serif;">@c21h23no5_sss </b>- Степан Седунов - <b style="color: #004EA8; font-family: 'Zen Maru Gothic', serif;">разработчик</b></h1>
+    </div>
+  </form>
+</div>
 
 <br><br><br><br>
 <div class="test">
@@ -49,6 +63,19 @@
       <a href="@">Вк</a>
     </div>
   </div>
+</div>
+
+<br><br><br><br>
+<div class="test">
+  <button class="view, button-28" style="
+  position: relative;
+  border-radius: 4rem; 
+  width: 250px;
+  min-height: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  align-content: center;" onclick="document.getElementById('id01').style.display='block'">Наши тг</button>
 </div>
 
 {% include 'footer.html' %}

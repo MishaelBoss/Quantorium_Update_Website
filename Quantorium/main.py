@@ -83,7 +83,7 @@ class User(db.Model):
 class Image(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True)
-    dateR = db.Column(db.DateTime, default=datetime.utcnow())
+    dateR = db.Column(db.DateTime, default=datetime.utcnow)
     type_object = db.Column(db.String(50), default='public')
 
     def __repr__(self):

@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.utils import secure_filename
 import os, hashlib
+from flask_moment import Moment
 
 app = Flask(__name__)
 app.static_folder = 'static'
@@ -215,7 +216,7 @@ def admin():
     name = request.cookies.get('user')
     user = User.query.filter_by(login=name).first()
     if not user.is_super_user or name is None:
-        return render_template('/admin-index.html')
+        return redirect('/login')
     if name is None:
         return redirect('/login')
     return render_template("admin-index.html")

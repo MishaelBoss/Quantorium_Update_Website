@@ -37,13 +37,15 @@ label{
 }
 
 .block-asterisk img{
-    width: 5%;
+    width: 3.5%;
     margin-left: 5px;
 }
 
 .block-asterisk{
+    font-family: 'Poppins',sans-serif;
     display: flex; 
     align-items: baseline;
+    padding: 5px 0 5px 0;
 }
 
 li{

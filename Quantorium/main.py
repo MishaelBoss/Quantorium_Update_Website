@@ -135,11 +135,12 @@ def register():
                 return resp
             except Exception as ex:
                 print(ex)
-                return redirect("/register")
+                return redirect("/login")
         except:
             flash('Что то пошло не так', category='error')
     else:
             return render_template("register.html", user=user)
+
 
 @app.route('/login', methods=['POST', "GET"])
 def login():

@@ -178,11 +178,12 @@ body::-webkit-scrollbar-thumb:hover {
   border-radius: 20px;
   position: relative;
   text-align: center;
-  width: 100%;
+  width: 90%;
   border: 1px solid #333;
   box-shadow: 8px 10px 5px #444;
   padding: 8px 12px;
   background-color: white;
+  margin: auto;
 }
 
 /* это часть карточки о нас */

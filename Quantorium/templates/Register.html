@@ -14,7 +14,7 @@
 {% for cat, msg in get_flashed_messages(True) %}
 <di class="flash {{cat}}">{{ msg }}</di>
 {% endfor %}
-<form style="position: absolute; height: 900px; margin-top: 150px;" action="" method="post" method="POST" action="/register" enctype="multipart/form-data">
+<form style="position: absolute; height: 980px; margin-top: 150px;" action="" method="post" method="POST" action="/register" enctype="multipart/form-data">
   <h3>Регистрация</h3>
 
   <div class="block-asterisk">
@@ -40,7 +40,7 @@
   <div class="block-asterisk">
     <label for="password">Пароль</label><img src="/static/icons/asterisk.png">
   </div>
-  <li>Минимальная длина пароля 8</li>
+  <li style="padding: 10px 0 10px 0;">Минимальная длина пароля 8</li>
   <input autocomplete="on" type="password" name="password" placeholder="Password" id="password" minlength="8" maxlength="255">
   <div style="display: flex; align-items: center;">
     <input style="width: 1rem; margin: auto;" type="checkbox" onclick="checking()"><p style="margin-right: 180px;">Show Password</p>

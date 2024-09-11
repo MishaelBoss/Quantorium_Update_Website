@@ -1,9 +1,12 @@
 from flask import Flask, render_template, request, redirect, make_response, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
+from flask_moment import Moment
 from datetime import datetime
 from werkzeug.utils import secure_filename
 import os, hashlib
 from flask_moment import Moment
+
+moment = Moment()
 
 app = Flask(__name__)
 app.static_folder = 'static'
@@ -74,10 +77,11 @@ class User(db.Model):
     password = db.Column(db.Text(), nullable=False)
     pathUser = db.Column(db.Integer, nullable=False)
     is_super_user = db.Column(db.Boolean, default=False, nullable=False)
-    date = db.Column(db.DateTime(), default=datetime.utcnow)
+    date_sien = db.Column(db.DateTime(), default=datetime.utcnow)
     last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
 
     def __repr__(self):
+        self.last_seen = datetime.utcnow()
         return '<User %r>' % self.id
     
 
@@ -203,13 +207,13 @@ def logout():
     return resp
 
 
-@app.route('/Buy')
+@app.route('/buy')
 def Buy():
     name = request.cookies.get('user')
     user = User.query.filter_by(login=name).first()
     if name is None:
         return redirect('/login')
-    return render_template("Buy.html", user=user)
+    return render_template("buy.html", user=user)
 
 
 @app.route('/admin')
@@ -488,10 +492,12 @@ def products():
 
 @app.route('/products/<int:id>')
 def products_detail(id):
+
     name = request.cookies.get('user')
     user = User.query.filter_by(login=name).first()
 
     article = Article.query.get(id)
+    article = Article.query.order_by(Comment.date_post.desc()).all()
     comment = Comment.query.order_by(Comment.date_post.desc()).all()
     return render_template("products_detail.html", user=user, article=article, comment=comment)
 

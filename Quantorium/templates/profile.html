@@ -2,6 +2,9 @@
 <html>
     <head>
       {% include 'url.html' %}
+      <script>
+          {{ moment.flask_moment_js() }}
+      </script>
       <title>Профиль</title>
     </head>
 </html>
@@ -24,14 +27,14 @@
       <hr class="hr-washed">
       <p><b>email: {{user.email}}</p>
       <hr class="hr-washed">
-      <p><b>Дата создание аккаунта:  {{ user.date }}</b></p>
-      <p><b>Последнее посещение:  {{ user.last_seen }}</b></p>
+      <p><b>Дата создание аккаунта:  {{ moment(user.date_sien).format('L') }}</b></p>
+      <p><b>Последнее посещение:  {{ moment(user.last_seen).fromNow() }}</b></p>
   </div>
   <div class="Btn_detail">
     <a class="view, button-28" href="/profile_edit" style="
     position: relative;
     border-radius: 4rem; 
-    width: 150px; 
+    width: 200px; 
     height: 20px; 
     min-height: 50px;
     margin-left: auto;
